@@ -50,7 +50,7 @@ public final class AppDatabase_Impl extends AppDatabase {
   @Override
   @NonNull
   protected SupportSQLiteOpenHelper createOpenHelper(@NonNull final DatabaseConfiguration config) {
-    final SupportSQLiteOpenHelper.Callback _openCallback = new RoomOpenHelper(config, new RoomOpenHelper.Delegate(1) {
+    final SupportSQLiteOpenHelper.Callback _openCallback = new RoomOpenHelper(config, new RoomOpenHelper.Delegate(2) {
       @Override
       public void createAllTables(@NonNull final SupportSQLiteDatabase db) {
         db.execSQL("CREATE TABLE IF NOT EXISTS `children` (`id` TEXT NOT NULL, `name` TEXT NOT NULL, `enrollmentDate` TEXT NOT NULL, `status` TEXT NOT NULL, `notes` TEXT, `createdAt` TEXT NOT NULL, `updatedAt` TEXT NOT NULL, PRIMARY KEY(`id`))");
@@ -58,10 +58,10 @@ public final class AppDatabase_Impl extends AppDatabase {
         db.execSQL("CREATE TABLE IF NOT EXISTS `payments` (`id` TEXT NOT NULL, `childId` TEXT NOT NULL, `feeConfigId` TEXT NOT NULL, `amount` REAL NOT NULL, `paymentDate` TEXT NOT NULL, `paymentType` TEXT NOT NULL, `receiptPath` TEXT, `ocrExtractedName` TEXT, `ocrExtractedAmount` REAL, `manualEntry` INTEGER NOT NULL, `notes` TEXT, `createdAt` TEXT NOT NULL, `updatedAt` TEXT NOT NULL, PRIMARY KEY(`id`), FOREIGN KEY(`childId`) REFERENCES `children`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE , FOREIGN KEY(`feeConfigId`) REFERENCES `fee_configurations`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )");
         db.execSQL("CREATE INDEX IF NOT EXISTS `index_payments_childId` ON `payments` (`childId`)");
         db.execSQL("CREATE INDEX IF NOT EXISTS `index_payments_feeConfigId` ON `payments` (`feeConfigId`)");
-        db.execSQL("CREATE TABLE IF NOT EXISTS `expenses` (`id` TEXT NOT NULL, `expenseDate` TEXT NOT NULL, `category` TEXT NOT NULL, `description` TEXT NOT NULL, `amount` REAL NOT NULL, `receiptPath` TEXT, `ocrExtractedVendor` TEXT, `ocrExtractedAmount` REAL, `ocrExtractedDate` TEXT, `manualEntry` INTEGER NOT NULL, `notes` TEXT, `createdAt` TEXT NOT NULL, `updatedAt` TEXT NOT NULL, PRIMARY KEY(`id`))");
+        db.execSQL("CREATE TABLE IF NOT EXISTS `expenses` (`id` TEXT NOT NULL, `receiptNumber` TEXT NOT NULL DEFAULT '', `expenseDate` TEXT NOT NULL, `category` TEXT NOT NULL, `supplierName` TEXT NOT NULL DEFAULT '', `description` TEXT NOT NULL, `amount` REAL NOT NULL, `receiptPath` TEXT, `ocrExtractedVendor` TEXT, `ocrExtractedAmount` REAL, `ocrExtractedDate` TEXT, `manualEntry` INTEGER NOT NULL, `notes` TEXT, `createdAt` TEXT NOT NULL, `updatedAt` TEXT NOT NULL, PRIMARY KEY(`id`))");
         db.execSQL("CREATE TABLE IF NOT EXISTS `sync_metadata` (`id` TEXT NOT NULL, `lastSyncTime` TEXT, `lastBackupTime` TEXT, `cloudProvider` TEXT, `syncStatus` TEXT NOT NULL, PRIMARY KEY(`id`))");
         db.execSQL("CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)");
-        db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '6f3b208c5f61cf0127bde74d28ea344e')");
+        db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'e3faef92622354b20cd111b3a0d4eec8')");
       }
 
       @Override
@@ -177,10 +177,12 @@ public final class AppDatabase_Impl extends AppDatabase {
                   + " Expected:\n" + _infoPayments + "\n"
                   + " Found:\n" + _existingPayments);
         }
-        final HashMap<String, TableInfo.Column> _columnsExpenses = new HashMap<String, TableInfo.Column>(13);
+        final HashMap<String, TableInfo.Column> _columnsExpenses = new HashMap<String, TableInfo.Column>(15);
         _columnsExpenses.put("id", new TableInfo.Column("id", "TEXT", true, 1, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsExpenses.put("receiptNumber", new TableInfo.Column("receiptNumber", "TEXT", true, 0, "''", TableInfo.CREATED_FROM_ENTITY));
         _columnsExpenses.put("expenseDate", new TableInfo.Column("expenseDate", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsExpenses.put("category", new TableInfo.Column("category", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsExpenses.put("supplierName", new TableInfo.Column("supplierName", "TEXT", true, 0, "''", TableInfo.CREATED_FROM_ENTITY));
         _columnsExpenses.put("description", new TableInfo.Column("description", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsExpenses.put("amount", new TableInfo.Column("amount", "REAL", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsExpenses.put("receiptPath", new TableInfo.Column("receiptPath", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
@@ -217,7 +219,7 @@ public final class AppDatabase_Impl extends AppDatabase {
         }
         return new RoomOpenHelper.ValidationResult(true, null);
       }
-    }, "6f3b208c5f61cf0127bde74d28ea344e", "defb8ba7986deaaa07bc0f5fa9b9d544");
+    }, "e3faef92622354b20cd111b3a0d4eec8", "01970688be491c925b7655a85f399161");
     final SupportSQLiteOpenHelper.Configuration _sqliteConfig = SupportSQLiteOpenHelper.Configuration.builder(config.context).name(config.name).callback(_openCallback).build();
     final SupportSQLiteOpenHelper _helper = config.sqliteOpenHelperFactory.create(_sqliteConfig);
     return _helper;

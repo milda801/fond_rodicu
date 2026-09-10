@@ -50,7 +50,14 @@ class BackupService(
         backup.children.forEach { children.insertChild(it) }
         backup.feeConfigurations.forEach { fees.insertFeeConfiguration(it) }
         backup.payments.forEach { payments.insertPayment(it) }
-        backup.expenses.forEach { expenses.insertExpense(it) }
+        backup.expenses.forEach {
+            expenses.insertExpense(
+                it.copy(
+                    receiptNumber = it.receiptNumber.orEmpty(),
+                    supplierName = it.supplierName.orEmpty()
+                )
+            )
+        }
         return backup
     }
 }

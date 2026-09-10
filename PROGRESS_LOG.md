@@ -531,3 +531,21 @@ d:/_actual/099/skolka/
 ### Verification
 - [x] Ran `./gradlew test assembleDebug --warning-mode all` successfully after stopping stale Gradle daemons that temporarily held build-output files open.
 - [x] All 76 executed Gradle tasks completed, both unit-test variants passed, and the localized debug APK was generated.
+
+## Expanded expense records - 2026-09-10
+
+### Completed
+- [x] Added a required paper receipt count number to each new expense for matching app records to physical receipts.
+- [x] Added a required supplier name and an optional note while retaining date, amount, and description.
+- [x] Removed category from the expense-entry form; existing storage compatibility is retained internally with the neutral `other` value.
+- [x] Updated receipt OCR so the probable merchant name fills the supplier field rather than the description.
+- [x] Updated expense list rows to show count number, date, amount, supplier, description, and note.
+- [x] Updated CSV and PDF exports with the expanded expense fields.
+- [x] Added a Room 1→2 migration with non-destructive defaults, preserving existing installed-app data.
+- [x] Kept JSON backup compatibility: older backups restore with blank values for fields they do not contain.
+- [x] Added matching English and Czech resource strings; both catalogs still contain the same 81 keys.
+
+### Verification
+- [x] Ran `./gradlew clean test assembleDebug --warning-mode all` successfully after the schema and UI changes.
+- [x] Re-ran `./gradlew test assembleDebug --warning-mode all` after eliminating the migration override warning.
+- [x] Debug and release unit-test variants passed and the updated debug APK was generated without source or resource warnings.

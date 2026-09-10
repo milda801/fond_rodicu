@@ -28,9 +28,9 @@ class ReportExporter(private val context: Context) {
                 writer.appendLine("${csv(child.name)},$expected,$paid,${(expected - paid).coerceAtLeast(0.0)}")
             }
             writer.appendLine()
-            writer.appendLine(listOf(R.string.expense_date, R.string.category, R.string.description, R.string.amount).joinToString(",") { csv(context.getString(it)) })
+            writer.appendLine(listOf(R.string.receipt_number, R.string.expense_date, R.string.amount, R.string.supplier_name, R.string.description, R.string.note).joinToString(",") { csv(context.getString(it)) })
             data.expenses.forEach { expense ->
-                writer.appendLine("${csv(expense.expenseDate)},${csv(expense.category)},${csv(expense.description)},${expense.amount}")
+                writer.appendLine("${csv(expense.receiptNumber)},${csv(expense.expenseDate)},${expense.amount},${csv(expense.supplierName)},${csv(expense.description)},${csv(expense.notes.orEmpty())}")
             }
         }
         return file
@@ -74,7 +74,9 @@ class ReportExporter(private val context: Context) {
         }
         y += 12f
         line(context.getString(R.string.expenses), true)
-        data.expenses.forEach { line("${it.expenseDate} | ${it.category} | ${it.description} | ${money.format(it.amount)}") }
+        data.expenses.forEach {
+            line("#${it.receiptNumber} | ${it.expenseDate} | ${money.format(it.amount)} | ${it.supplierName} | ${it.description}${it.notes?.takeIf(String::isNotBlank)?.let { note -> " | ${context.getString(R.string.note)}: $note" }.orEmpty()}")
+        }
         document.finishPage(page)
         FileOutputStream(file).use(document::writeTo)
         document.close()

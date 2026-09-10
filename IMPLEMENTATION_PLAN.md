@@ -47,7 +47,8 @@ Android mobile application for kindergarten expense tracking with cloud backup a
 - **Expense Recording**:
   - Camera capture of expense receipt
   - OCR extraction (vendor, amount, date)
-  - Category selection (dropdown)
+  - Paper receipt count number for physical filing
+  - Supplier name, description, and optional note
   - Manual entry fallback
 
 ### 2.2 Data Output
@@ -175,10 +176,12 @@ CREATE TABLE sync_metadata (
 - List of all expenses (sorted by date)
 - "Add Expense" button
 - Expense entry form:
+  - Paper receipt count number
   - Date picker
-  - Category selector (dropdown)
-  - Description input
   - Amount input
+  - Supplier name
+  - Description input
+  - Optional note
   - Receipt upload (camera/gallery)
   - OCR preview (if receipt uploaded)
   - Manual entry option

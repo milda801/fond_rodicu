@@ -58,7 +58,7 @@ class ExpensesFragment : Fragment() {
                 .onSuccess { result ->
                     result.amount?.let { form.findViewById<EditText>(R.id.expenseAmountInput).setText(it.toString()) }
                     result.date?.let { form.findViewById<EditText>(R.id.expenseDateInput).setText(it) }
-                    result.probableNameOrVendor?.let { form.findViewById<EditText>(R.id.descriptionInput).setText(it) }
+                    result.probableNameOrVendor?.let { form.findViewById<EditText>(R.id.supplierNameInput).setText(it) }
                 }.onFailure { android.widget.Toast.makeText(requireContext(), it.message, android.widget.Toast.LENGTH_LONG).show() }
         }
     }
@@ -85,14 +85,28 @@ class ExpensesFragment : Fragment() {
             dialog.show()
             dialog.getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener saveExpense@{
                 val amount = form.findViewById<EditText>(R.id.expenseAmountInput).text.toString().toDoubleOrNull()
+                val receiptNumber = form.findViewById<EditText>(R.id.receiptNumberInput).text.toString().trim()
                 val date = form.findViewById<EditText>(R.id.expenseDateInput).text.toString().trim()
-                val category = form.findViewById<EditText>(R.id.categoryInput).text.toString().trim()
+                val supplierName = form.findViewById<EditText>(R.id.supplierNameInput).text.toString().trim()
                 val description = form.findViewById<EditText>(R.id.descriptionInput).text.toString().trim()
-                if (amount == null || amount <= 0.0 || category.isBlank() || description.isBlank() || runCatching { LocalDate.parse(date) }.isFailure) {
+                val note = form.findViewById<EditText>(R.id.expenseNoteInput).text.toString().trim()
+                if (amount == null || amount <= 0.0 || receiptNumber.isBlank() || supplierName.isBlank() || description.isBlank() || runCatching { LocalDate.parse(date) }.isFailure) {
                     android.widget.Toast.makeText(requireContext(), R.string.invalid_entry, android.widget.Toast.LENGTH_LONG).show()
                     return@saveExpense
                 }
-                viewModel.addExpense(Expense(expenseDate = date, category = category, description = description, amount = amount, receiptPath = activeReceiptPath, manualEntry = activeReceiptPath == null))
+                viewModel.addExpense(
+                    Expense(
+                        receiptNumber = receiptNumber,
+                        expenseDate = date,
+                        category = "other",
+                        supplierName = supplierName,
+                        description = description,
+                        amount = amount,
+                        receiptPath = activeReceiptPath,
+                        manualEntry = activeReceiptPath == null,
+                        notes = note.takeIf(String::isNotBlank)
+                    )
+                )
                 activeReceiptPath = null
                 dialog.dismiss()
             }
@@ -100,7 +114,12 @@ class ExpensesFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch { viewLifecycleOwner.repeatOnLifecycle(androidx.lifecycle.Lifecycle.State.STARTED) { viewModel.expenseUiState.collect { ui ->
             list.removeAllViews(); ui.expenses.forEach { expense -> list.addView(TextView(requireContext()).apply {
                 setTextAppearance(R.style.TextAppearance_Kindergarten_BodyLarge)
-                text = "${expense.expenseDate}  ${expense.description}\n${NumberFormat.getCurrencyInstance().format(expense.amount)}"; setPadding(0, 16, 0, 16)
+                text = buildString {
+                    append(getString(R.string.expense_list_primary, expense.receiptNumber, expense.expenseDate, NumberFormat.getCurrencyInstance().format(expense.amount)))
+                    append("\n").append(getString(R.string.expense_list_supplier, expense.supplierName.ifBlank { getString(R.string.not_available) }))
+                    append("\n").append(expense.description)
+                    expense.notes?.takeIf(String::isNotBlank)?.let { append("\n").append(getString(R.string.expense_list_note, it)) }
+                }; setPadding(0, 16, 0, 16)
                 setOnLongClickListener {
                     MaterialAlertDialogBuilder(requireContext()).setMessage(R.string.delete_expense).setNegativeButton(R.string.cancel, null).setPositiveButton(R.string.delete) { _, _ ->
                         expense.receiptPath?.let { File(it).delete() }

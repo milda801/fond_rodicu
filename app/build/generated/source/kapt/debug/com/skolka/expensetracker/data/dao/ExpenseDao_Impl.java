@@ -50,7 +50,7 @@ public final class ExpenseDao_Impl implements ExpenseDao {
       @Override
       @NonNull
       protected String createQuery() {
-        return "INSERT OR REPLACE INTO `expenses` (`id`,`expenseDate`,`category`,`description`,`amount`,`receiptPath`,`ocrExtractedVendor`,`ocrExtractedAmount`,`ocrExtractedDate`,`manualEntry`,`notes`,`createdAt`,`updatedAt`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        return "INSERT OR REPLACE INTO `expenses` (`id`,`receiptNumber`,`expenseDate`,`category`,`supplierName`,`description`,`amount`,`receiptPath`,`ocrExtractedVendor`,`ocrExtractedAmount`,`ocrExtractedDate`,`manualEntry`,`notes`,`createdAt`,`updatedAt`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
       }
 
       @Override
@@ -61,58 +61,68 @@ public final class ExpenseDao_Impl implements ExpenseDao {
         } else {
           statement.bindString(1, entity.getId());
         }
-        if (entity.getExpenseDate() == null) {
+        if (entity.getReceiptNumber() == null) {
           statement.bindNull(2);
         } else {
-          statement.bindString(2, entity.getExpenseDate());
+          statement.bindString(2, entity.getReceiptNumber());
         }
-        if (entity.getCategory() == null) {
+        if (entity.getExpenseDate() == null) {
           statement.bindNull(3);
         } else {
-          statement.bindString(3, entity.getCategory());
+          statement.bindString(3, entity.getExpenseDate());
         }
-        if (entity.getDescription() == null) {
+        if (entity.getCategory() == null) {
           statement.bindNull(4);
         } else {
-          statement.bindString(4, entity.getDescription());
+          statement.bindString(4, entity.getCategory());
         }
-        statement.bindDouble(5, entity.getAmount());
-        if (entity.getReceiptPath() == null) {
+        if (entity.getSupplierName() == null) {
+          statement.bindNull(5);
+        } else {
+          statement.bindString(5, entity.getSupplierName());
+        }
+        if (entity.getDescription() == null) {
           statement.bindNull(6);
         } else {
-          statement.bindString(6, entity.getReceiptPath());
+          statement.bindString(6, entity.getDescription());
         }
-        if (entity.getOcrExtractedVendor() == null) {
-          statement.bindNull(7);
-        } else {
-          statement.bindString(7, entity.getOcrExtractedVendor());
-        }
-        if (entity.getOcrExtractedAmount() == null) {
+        statement.bindDouble(7, entity.getAmount());
+        if (entity.getReceiptPath() == null) {
           statement.bindNull(8);
         } else {
-          statement.bindDouble(8, entity.getOcrExtractedAmount());
+          statement.bindString(8, entity.getReceiptPath());
         }
-        if (entity.getOcrExtractedDate() == null) {
+        if (entity.getOcrExtractedVendor() == null) {
           statement.bindNull(9);
         } else {
-          statement.bindString(9, entity.getOcrExtractedDate());
+          statement.bindString(9, entity.getOcrExtractedVendor());
         }
-        final int _tmp = entity.getManualEntry() ? 1 : 0;
-        statement.bindLong(10, _tmp);
-        if (entity.getNotes() == null) {
+        if (entity.getOcrExtractedAmount() == null) {
+          statement.bindNull(10);
+        } else {
+          statement.bindDouble(10, entity.getOcrExtractedAmount());
+        }
+        if (entity.getOcrExtractedDate() == null) {
           statement.bindNull(11);
         } else {
-          statement.bindString(11, entity.getNotes());
+          statement.bindString(11, entity.getOcrExtractedDate());
         }
-        if (entity.getCreatedAt() == null) {
-          statement.bindNull(12);
-        } else {
-          statement.bindString(12, entity.getCreatedAt());
-        }
-        if (entity.getUpdatedAt() == null) {
+        final int _tmp = entity.getManualEntry() ? 1 : 0;
+        statement.bindLong(12, _tmp);
+        if (entity.getNotes() == null) {
           statement.bindNull(13);
         } else {
-          statement.bindString(13, entity.getUpdatedAt());
+          statement.bindString(13, entity.getNotes());
+        }
+        if (entity.getCreatedAt() == null) {
+          statement.bindNull(14);
+        } else {
+          statement.bindString(14, entity.getCreatedAt());
+        }
+        if (entity.getUpdatedAt() == null) {
+          statement.bindNull(15);
+        } else {
+          statement.bindString(15, entity.getUpdatedAt());
         }
       }
     };
@@ -137,7 +147,7 @@ public final class ExpenseDao_Impl implements ExpenseDao {
       @Override
       @NonNull
       protected String createQuery() {
-        return "UPDATE OR ABORT `expenses` SET `id` = ?,`expenseDate` = ?,`category` = ?,`description` = ?,`amount` = ?,`receiptPath` = ?,`ocrExtractedVendor` = ?,`ocrExtractedAmount` = ?,`ocrExtractedDate` = ?,`manualEntry` = ?,`notes` = ?,`createdAt` = ?,`updatedAt` = ? WHERE `id` = ?";
+        return "UPDATE OR ABORT `expenses` SET `id` = ?,`receiptNumber` = ?,`expenseDate` = ?,`category` = ?,`supplierName` = ?,`description` = ?,`amount` = ?,`receiptPath` = ?,`ocrExtractedVendor` = ?,`ocrExtractedAmount` = ?,`ocrExtractedDate` = ?,`manualEntry` = ?,`notes` = ?,`createdAt` = ?,`updatedAt` = ? WHERE `id` = ?";
       }
 
       @Override
@@ -148,63 +158,73 @@ public final class ExpenseDao_Impl implements ExpenseDao {
         } else {
           statement.bindString(1, entity.getId());
         }
-        if (entity.getExpenseDate() == null) {
+        if (entity.getReceiptNumber() == null) {
           statement.bindNull(2);
         } else {
-          statement.bindString(2, entity.getExpenseDate());
+          statement.bindString(2, entity.getReceiptNumber());
         }
-        if (entity.getCategory() == null) {
+        if (entity.getExpenseDate() == null) {
           statement.bindNull(3);
         } else {
-          statement.bindString(3, entity.getCategory());
+          statement.bindString(3, entity.getExpenseDate());
         }
-        if (entity.getDescription() == null) {
+        if (entity.getCategory() == null) {
           statement.bindNull(4);
         } else {
-          statement.bindString(4, entity.getDescription());
+          statement.bindString(4, entity.getCategory());
         }
-        statement.bindDouble(5, entity.getAmount());
-        if (entity.getReceiptPath() == null) {
+        if (entity.getSupplierName() == null) {
+          statement.bindNull(5);
+        } else {
+          statement.bindString(5, entity.getSupplierName());
+        }
+        if (entity.getDescription() == null) {
           statement.bindNull(6);
         } else {
-          statement.bindString(6, entity.getReceiptPath());
+          statement.bindString(6, entity.getDescription());
         }
-        if (entity.getOcrExtractedVendor() == null) {
-          statement.bindNull(7);
-        } else {
-          statement.bindString(7, entity.getOcrExtractedVendor());
-        }
-        if (entity.getOcrExtractedAmount() == null) {
+        statement.bindDouble(7, entity.getAmount());
+        if (entity.getReceiptPath() == null) {
           statement.bindNull(8);
         } else {
-          statement.bindDouble(8, entity.getOcrExtractedAmount());
+          statement.bindString(8, entity.getReceiptPath());
         }
-        if (entity.getOcrExtractedDate() == null) {
+        if (entity.getOcrExtractedVendor() == null) {
           statement.bindNull(9);
         } else {
-          statement.bindString(9, entity.getOcrExtractedDate());
+          statement.bindString(9, entity.getOcrExtractedVendor());
         }
-        final int _tmp = entity.getManualEntry() ? 1 : 0;
-        statement.bindLong(10, _tmp);
-        if (entity.getNotes() == null) {
+        if (entity.getOcrExtractedAmount() == null) {
+          statement.bindNull(10);
+        } else {
+          statement.bindDouble(10, entity.getOcrExtractedAmount());
+        }
+        if (entity.getOcrExtractedDate() == null) {
           statement.bindNull(11);
         } else {
-          statement.bindString(11, entity.getNotes());
+          statement.bindString(11, entity.getOcrExtractedDate());
         }
-        if (entity.getCreatedAt() == null) {
-          statement.bindNull(12);
-        } else {
-          statement.bindString(12, entity.getCreatedAt());
-        }
-        if (entity.getUpdatedAt() == null) {
+        final int _tmp = entity.getManualEntry() ? 1 : 0;
+        statement.bindLong(12, _tmp);
+        if (entity.getNotes() == null) {
           statement.bindNull(13);
         } else {
-          statement.bindString(13, entity.getUpdatedAt());
+          statement.bindString(13, entity.getNotes());
         }
-        if (entity.getId() == null) {
+        if (entity.getCreatedAt() == null) {
           statement.bindNull(14);
         } else {
-          statement.bindString(14, entity.getId());
+          statement.bindString(14, entity.getCreatedAt());
+        }
+        if (entity.getUpdatedAt() == null) {
+          statement.bindNull(15);
+        } else {
+          statement.bindString(15, entity.getUpdatedAt());
+        }
+        if (entity.getId() == null) {
+          statement.bindNull(16);
+        } else {
+          statement.bindString(16, entity.getId());
         }
       }
     };
@@ -319,8 +339,10 @@ public final class ExpenseDao_Impl implements ExpenseDao {
         final Cursor _cursor = DBUtil.query(__db, _statement, false, null);
         try {
           final int _cursorIndexOfId = CursorUtil.getColumnIndexOrThrow(_cursor, "id");
+          final int _cursorIndexOfReceiptNumber = CursorUtil.getColumnIndexOrThrow(_cursor, "receiptNumber");
           final int _cursorIndexOfExpenseDate = CursorUtil.getColumnIndexOrThrow(_cursor, "expenseDate");
           final int _cursorIndexOfCategory = CursorUtil.getColumnIndexOrThrow(_cursor, "category");
+          final int _cursorIndexOfSupplierName = CursorUtil.getColumnIndexOrThrow(_cursor, "supplierName");
           final int _cursorIndexOfDescription = CursorUtil.getColumnIndexOrThrow(_cursor, "description");
           final int _cursorIndexOfAmount = CursorUtil.getColumnIndexOrThrow(_cursor, "amount");
           final int _cursorIndexOfReceiptPath = CursorUtil.getColumnIndexOrThrow(_cursor, "receiptPath");
@@ -339,6 +361,12 @@ public final class ExpenseDao_Impl implements ExpenseDao {
             } else {
               _tmpId = _cursor.getString(_cursorIndexOfId);
             }
+            final String _tmpReceiptNumber;
+            if (_cursor.isNull(_cursorIndexOfReceiptNumber)) {
+              _tmpReceiptNumber = null;
+            } else {
+              _tmpReceiptNumber = _cursor.getString(_cursorIndexOfReceiptNumber);
+            }
             final String _tmpExpenseDate;
             if (_cursor.isNull(_cursorIndexOfExpenseDate)) {
               _tmpExpenseDate = null;
@@ -350,6 +378,12 @@ public final class ExpenseDao_Impl implements ExpenseDao {
               _tmpCategory = null;
             } else {
               _tmpCategory = _cursor.getString(_cursorIndexOfCategory);
+            }
+            final String _tmpSupplierName;
+            if (_cursor.isNull(_cursorIndexOfSupplierName)) {
+              _tmpSupplierName = null;
+            } else {
+              _tmpSupplierName = _cursor.getString(_cursorIndexOfSupplierName);
             }
             final String _tmpDescription;
             if (_cursor.isNull(_cursorIndexOfDescription)) {
@@ -405,7 +439,7 @@ public final class ExpenseDao_Impl implements ExpenseDao {
             } else {
               _tmpUpdatedAt = _cursor.getString(_cursorIndexOfUpdatedAt);
             }
-            _result = new Expense(_tmpId,_tmpExpenseDate,_tmpCategory,_tmpDescription,_tmpAmount,_tmpReceiptPath,_tmpOcrExtractedVendor,_tmpOcrExtractedAmount,_tmpOcrExtractedDate,_tmpManualEntry,_tmpNotes,_tmpCreatedAt,_tmpUpdatedAt);
+            _result = new Expense(_tmpId,_tmpReceiptNumber,_tmpExpenseDate,_tmpCategory,_tmpSupplierName,_tmpDescription,_tmpAmount,_tmpReceiptPath,_tmpOcrExtractedVendor,_tmpOcrExtractedAmount,_tmpOcrExtractedDate,_tmpManualEntry,_tmpNotes,_tmpCreatedAt,_tmpUpdatedAt);
           } else {
             _result = null;
           }
@@ -435,8 +469,10 @@ public final class ExpenseDao_Impl implements ExpenseDao {
         final Cursor _cursor = DBUtil.query(__db, _statement, false, null);
         try {
           final int _cursorIndexOfId = CursorUtil.getColumnIndexOrThrow(_cursor, "id");
+          final int _cursorIndexOfReceiptNumber = CursorUtil.getColumnIndexOrThrow(_cursor, "receiptNumber");
           final int _cursorIndexOfExpenseDate = CursorUtil.getColumnIndexOrThrow(_cursor, "expenseDate");
           final int _cursorIndexOfCategory = CursorUtil.getColumnIndexOrThrow(_cursor, "category");
+          final int _cursorIndexOfSupplierName = CursorUtil.getColumnIndexOrThrow(_cursor, "supplierName");
           final int _cursorIndexOfDescription = CursorUtil.getColumnIndexOrThrow(_cursor, "description");
           final int _cursorIndexOfAmount = CursorUtil.getColumnIndexOrThrow(_cursor, "amount");
           final int _cursorIndexOfReceiptPath = CursorUtil.getColumnIndexOrThrow(_cursor, "receiptPath");
@@ -456,6 +492,12 @@ public final class ExpenseDao_Impl implements ExpenseDao {
             } else {
               _tmpId = _cursor.getString(_cursorIndexOfId);
             }
+            final String _tmpReceiptNumber;
+            if (_cursor.isNull(_cursorIndexOfReceiptNumber)) {
+              _tmpReceiptNumber = null;
+            } else {
+              _tmpReceiptNumber = _cursor.getString(_cursorIndexOfReceiptNumber);
+            }
             final String _tmpExpenseDate;
             if (_cursor.isNull(_cursorIndexOfExpenseDate)) {
               _tmpExpenseDate = null;
@@ -467,6 +509,12 @@ public final class ExpenseDao_Impl implements ExpenseDao {
               _tmpCategory = null;
             } else {
               _tmpCategory = _cursor.getString(_cursorIndexOfCategory);
+            }
+            final String _tmpSupplierName;
+            if (_cursor.isNull(_cursorIndexOfSupplierName)) {
+              _tmpSupplierName = null;
+            } else {
+              _tmpSupplierName = _cursor.getString(_cursorIndexOfSupplierName);
             }
             final String _tmpDescription;
             if (_cursor.isNull(_cursorIndexOfDescription)) {
@@ -522,7 +570,7 @@ public final class ExpenseDao_Impl implements ExpenseDao {
             } else {
               _tmpUpdatedAt = _cursor.getString(_cursorIndexOfUpdatedAt);
             }
-            _item = new Expense(_tmpId,_tmpExpenseDate,_tmpCategory,_tmpDescription,_tmpAmount,_tmpReceiptPath,_tmpOcrExtractedVendor,_tmpOcrExtractedAmount,_tmpOcrExtractedDate,_tmpManualEntry,_tmpNotes,_tmpCreatedAt,_tmpUpdatedAt);
+            _item = new Expense(_tmpId,_tmpReceiptNumber,_tmpExpenseDate,_tmpCategory,_tmpSupplierName,_tmpDescription,_tmpAmount,_tmpReceiptPath,_tmpOcrExtractedVendor,_tmpOcrExtractedAmount,_tmpOcrExtractedDate,_tmpManualEntry,_tmpNotes,_tmpCreatedAt,_tmpUpdatedAt);
             _result.add(_item);
           }
           return _result;
@@ -549,8 +597,10 @@ public final class ExpenseDao_Impl implements ExpenseDao {
         final Cursor _cursor = DBUtil.query(__db, _statement, false, null);
         try {
           final int _cursorIndexOfId = CursorUtil.getColumnIndexOrThrow(_cursor, "id");
+          final int _cursorIndexOfReceiptNumber = CursorUtil.getColumnIndexOrThrow(_cursor, "receiptNumber");
           final int _cursorIndexOfExpenseDate = CursorUtil.getColumnIndexOrThrow(_cursor, "expenseDate");
           final int _cursorIndexOfCategory = CursorUtil.getColumnIndexOrThrow(_cursor, "category");
+          final int _cursorIndexOfSupplierName = CursorUtil.getColumnIndexOrThrow(_cursor, "supplierName");
           final int _cursorIndexOfDescription = CursorUtil.getColumnIndexOrThrow(_cursor, "description");
           final int _cursorIndexOfAmount = CursorUtil.getColumnIndexOrThrow(_cursor, "amount");
           final int _cursorIndexOfReceiptPath = CursorUtil.getColumnIndexOrThrow(_cursor, "receiptPath");
@@ -570,6 +620,12 @@ public final class ExpenseDao_Impl implements ExpenseDao {
             } else {
               _tmpId = _cursor.getString(_cursorIndexOfId);
             }
+            final String _tmpReceiptNumber;
+            if (_cursor.isNull(_cursorIndexOfReceiptNumber)) {
+              _tmpReceiptNumber = null;
+            } else {
+              _tmpReceiptNumber = _cursor.getString(_cursorIndexOfReceiptNumber);
+            }
             final String _tmpExpenseDate;
             if (_cursor.isNull(_cursorIndexOfExpenseDate)) {
               _tmpExpenseDate = null;
@@ -581,6 +637,12 @@ public final class ExpenseDao_Impl implements ExpenseDao {
               _tmpCategory = null;
             } else {
               _tmpCategory = _cursor.getString(_cursorIndexOfCategory);
+            }
+            final String _tmpSupplierName;
+            if (_cursor.isNull(_cursorIndexOfSupplierName)) {
+              _tmpSupplierName = null;
+            } else {
+              _tmpSupplierName = _cursor.getString(_cursorIndexOfSupplierName);
             }
             final String _tmpDescription;
             if (_cursor.isNull(_cursorIndexOfDescription)) {
@@ -636,7 +698,7 @@ public final class ExpenseDao_Impl implements ExpenseDao {
             } else {
               _tmpUpdatedAt = _cursor.getString(_cursorIndexOfUpdatedAt);
             }
-            _item = new Expense(_tmpId,_tmpExpenseDate,_tmpCategory,_tmpDescription,_tmpAmount,_tmpReceiptPath,_tmpOcrExtractedVendor,_tmpOcrExtractedAmount,_tmpOcrExtractedDate,_tmpManualEntry,_tmpNotes,_tmpCreatedAt,_tmpUpdatedAt);
+            _item = new Expense(_tmpId,_tmpReceiptNumber,_tmpExpenseDate,_tmpCategory,_tmpSupplierName,_tmpDescription,_tmpAmount,_tmpReceiptPath,_tmpOcrExtractedVendor,_tmpOcrExtractedAmount,_tmpOcrExtractedDate,_tmpManualEntry,_tmpNotes,_tmpCreatedAt,_tmpUpdatedAt);
             _result.add(_item);
           }
           return _result;
@@ -675,8 +737,10 @@ public final class ExpenseDao_Impl implements ExpenseDao {
         final Cursor _cursor = DBUtil.query(__db, _statement, false, null);
         try {
           final int _cursorIndexOfId = CursorUtil.getColumnIndexOrThrow(_cursor, "id");
+          final int _cursorIndexOfReceiptNumber = CursorUtil.getColumnIndexOrThrow(_cursor, "receiptNumber");
           final int _cursorIndexOfExpenseDate = CursorUtil.getColumnIndexOrThrow(_cursor, "expenseDate");
           final int _cursorIndexOfCategory = CursorUtil.getColumnIndexOrThrow(_cursor, "category");
+          final int _cursorIndexOfSupplierName = CursorUtil.getColumnIndexOrThrow(_cursor, "supplierName");
           final int _cursorIndexOfDescription = CursorUtil.getColumnIndexOrThrow(_cursor, "description");
           final int _cursorIndexOfAmount = CursorUtil.getColumnIndexOrThrow(_cursor, "amount");
           final int _cursorIndexOfReceiptPath = CursorUtil.getColumnIndexOrThrow(_cursor, "receiptPath");
@@ -696,6 +760,12 @@ public final class ExpenseDao_Impl implements ExpenseDao {
             } else {
               _tmpId = _cursor.getString(_cursorIndexOfId);
             }
+            final String _tmpReceiptNumber;
+            if (_cursor.isNull(_cursorIndexOfReceiptNumber)) {
+              _tmpReceiptNumber = null;
+            } else {
+              _tmpReceiptNumber = _cursor.getString(_cursorIndexOfReceiptNumber);
+            }
             final String _tmpExpenseDate;
             if (_cursor.isNull(_cursorIndexOfExpenseDate)) {
               _tmpExpenseDate = null;
@@ -707,6 +777,12 @@ public final class ExpenseDao_Impl implements ExpenseDao {
               _tmpCategory = null;
             } else {
               _tmpCategory = _cursor.getString(_cursorIndexOfCategory);
+            }
+            final String _tmpSupplierName;
+            if (_cursor.isNull(_cursorIndexOfSupplierName)) {
+              _tmpSupplierName = null;
+            } else {
+              _tmpSupplierName = _cursor.getString(_cursorIndexOfSupplierName);
             }
             final String _tmpDescription;
             if (_cursor.isNull(_cursorIndexOfDescription)) {
@@ -762,7 +838,7 @@ public final class ExpenseDao_Impl implements ExpenseDao {
             } else {
               _tmpUpdatedAt = _cursor.getString(_cursorIndexOfUpdatedAt);
             }
-            _item = new Expense(_tmpId,_tmpExpenseDate,_tmpCategory,_tmpDescription,_tmpAmount,_tmpReceiptPath,_tmpOcrExtractedVendor,_tmpOcrExtractedAmount,_tmpOcrExtractedDate,_tmpManualEntry,_tmpNotes,_tmpCreatedAt,_tmpUpdatedAt);
+            _item = new Expense(_tmpId,_tmpReceiptNumber,_tmpExpenseDate,_tmpCategory,_tmpSupplierName,_tmpDescription,_tmpAmount,_tmpReceiptPath,_tmpOcrExtractedVendor,_tmpOcrExtractedAmount,_tmpOcrExtractedDate,_tmpManualEntry,_tmpNotes,_tmpCreatedAt,_tmpUpdatedAt);
             _result.add(_item);
           }
           return _result;

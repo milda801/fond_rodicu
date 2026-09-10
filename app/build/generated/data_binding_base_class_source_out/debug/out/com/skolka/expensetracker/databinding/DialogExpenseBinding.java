@@ -21,9 +21,6 @@ public final class DialogExpenseBinding implements ViewBinding {
   private final LinearLayout rootView;
 
   @NonNull
-  public final TextInputEditText categoryInput;
-
-  @NonNull
   public final TextInputEditText descriptionInput;
 
   @NonNull
@@ -33,18 +30,31 @@ public final class DialogExpenseBinding implements ViewBinding {
   public final TextInputEditText expenseDateInput;
 
   @NonNull
+  public final TextInputEditText expenseNoteInput;
+
+  @NonNull
+  public final TextInputEditText receiptNumberInput;
+
+  @NonNull
   public final MaterialButton scanExpenseReceiptButton;
 
+  @NonNull
+  public final TextInputEditText supplierNameInput;
+
   private DialogExpenseBinding(@NonNull LinearLayout rootView,
-      @NonNull TextInputEditText categoryInput, @NonNull TextInputEditText descriptionInput,
-      @NonNull TextInputEditText expenseAmountInput, @NonNull TextInputEditText expenseDateInput,
-      @NonNull MaterialButton scanExpenseReceiptButton) {
+      @NonNull TextInputEditText descriptionInput, @NonNull TextInputEditText expenseAmountInput,
+      @NonNull TextInputEditText expenseDateInput, @NonNull TextInputEditText expenseNoteInput,
+      @NonNull TextInputEditText receiptNumberInput,
+      @NonNull MaterialButton scanExpenseReceiptButton,
+      @NonNull TextInputEditText supplierNameInput) {
     this.rootView = rootView;
-    this.categoryInput = categoryInput;
     this.descriptionInput = descriptionInput;
     this.expenseAmountInput = expenseAmountInput;
     this.expenseDateInput = expenseDateInput;
+    this.expenseNoteInput = expenseNoteInput;
+    this.receiptNumberInput = receiptNumberInput;
     this.scanExpenseReceiptButton = scanExpenseReceiptButton;
+    this.supplierNameInput = supplierNameInput;
   }
 
   @Override
@@ -74,12 +84,6 @@ public final class DialogExpenseBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
-      id = R.id.categoryInput;
-      TextInputEditText categoryInput = ViewBindings.findChildViewById(rootView, id);
-      if (categoryInput == null) {
-        break missingId;
-      }
-
       id = R.id.descriptionInput;
       TextInputEditText descriptionInput = ViewBindings.findChildViewById(rootView, id);
       if (descriptionInput == null) {
@@ -98,14 +102,33 @@ public final class DialogExpenseBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.expenseNoteInput;
+      TextInputEditText expenseNoteInput = ViewBindings.findChildViewById(rootView, id);
+      if (expenseNoteInput == null) {
+        break missingId;
+      }
+
+      id = R.id.receiptNumberInput;
+      TextInputEditText receiptNumberInput = ViewBindings.findChildViewById(rootView, id);
+      if (receiptNumberInput == null) {
+        break missingId;
+      }
+
       id = R.id.scanExpenseReceiptButton;
       MaterialButton scanExpenseReceiptButton = ViewBindings.findChildViewById(rootView, id);
       if (scanExpenseReceiptButton == null) {
         break missingId;
       }
 
-      return new DialogExpenseBinding((LinearLayout) rootView, categoryInput, descriptionInput,
-          expenseAmountInput, expenseDateInput, scanExpenseReceiptButton);
+      id = R.id.supplierNameInput;
+      TextInputEditText supplierNameInput = ViewBindings.findChildViewById(rootView, id);
+      if (supplierNameInput == null) {
+        break missingId;
+      }
+
+      return new DialogExpenseBinding((LinearLayout) rootView, descriptionInput, expenseAmountInput,
+          expenseDateInput, expenseNoteInput, receiptNumberInput, scanExpenseReceiptButton,
+          supplierNameInput);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

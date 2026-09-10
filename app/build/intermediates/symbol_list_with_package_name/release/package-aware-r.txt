@@ -3244,7 +3244,6 @@ id cache_measures
 id callMeasure
 id cancel_button
 id carryVelocity
-id categoryInput
 id center
 id centerCrop
 id centerInside
@@ -3335,6 +3334,7 @@ id expanded_menu
 id expenseAmountInput
 id expenseDateInput
 id expenseList
+id expenseNoteInput
 id expensesFragment
 id exportPdfButton
 id exportSpreadsheetButton
@@ -3513,6 +3513,7 @@ id progress_circular
 id progress_horizontal
 id radio
 id ratio
+id receiptNumberInput
 id rectangles
 id reportSummary
 id report_drawn
@@ -3610,6 +3611,7 @@ id stretch
 id submenuarrow
 id submit_area
 id summaryText
+id supplierNameInput
 id supportScrollUp
 id tabMode
 id tag_accessibility_actions
@@ -3989,6 +3991,9 @@ string edit_child
 string error_a11y_label
 string error_icon_content_description
 string expense_date
+string expense_list_note
+string expense_list_primary
+string expense_list_supplier
 string expenses
 string export_pdf
 string export_spreadsheet
@@ -4112,7 +4117,9 @@ string nav_app_bar_navigate_up_description
 string nav_app_bar_open_drawer_description
 string no_children
 string no_data
+string not_available
 string not_paid
+string note
 string paid_full
 string paid_partial
 string password_toggle_content_description
@@ -4122,6 +4129,7 @@ string path_password_eye_mask_visible
 string path_password_strike_through
 string payment_status
 string payments
+string receipt_number
 string remaining
 string report_child
 string report_paid
@@ -4143,6 +4151,7 @@ string side_sheet_accessibility_pane_title
 string side_sheet_behavior
 string split_fee
 string status_bar_notification_info_overflow
+string supplier_name
 string take_photo
 string total_collected
 string total_expected

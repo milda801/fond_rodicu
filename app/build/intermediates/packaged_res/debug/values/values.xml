@@ -64,6 +64,9 @@
     <string name="disable_backup_confirmation">Stop daily automatic backup? Existing backup files will not be deleted.</string>
     <string name="edit_child">Edit child</string>
     <string name="expense_date">Expense date</string>
+    <string name="expense_list_note">Note: %1$s</string>
+    <string name="expense_list_primary">#%1$s · %2$s · %3$s</string>
+    <string name="expense_list_supplier">Supplier: %1$s</string>
     <string name="expenses">Expenses</string>
     <string name="export_pdf">Export PDF</string>
     <string name="export_spreadsheet">Export spreadsheet</string>
@@ -80,11 +83,14 @@
     <string name="long_press_to_delete">Long-press an item to delete it.</string>
     <string name="no_children">Add at least one child first.</string>
     <string name="no_data">No records yet</string>
+    <string name="not_available">Not available</string>
     <string name="not_paid">Not paid</string>
+    <string name="note">Note</string>
     <string name="paid_full">Paid</string>
     <string name="paid_partial">Partially paid</string>
     <string name="payment_status">Payment status</string>
     <string name="payments">Payments</string>
+    <string name="receipt_number">Count #</string>
     <string name="remaining">Remaining</string>
     <string name="report_child">Child</string>
     <string name="report_paid">Paid</string>
@@ -99,6 +105,7 @@
     <string name="send_email">Send by email</string>
     <string name="settings">Settings</string>
     <string name="split_fee">Allow two half-year installments</string>
+    <string name="supplier_name">Supplier name</string>
     <string name="take_photo">Take photo</string>
     <string name="total_collected">Collected</string>
     <string name="total_expected">Expected</string>

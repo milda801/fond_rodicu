@@ -4,6 +4,8 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.skolka.expensetracker.data.dao.ChildDao
 import com.skolka.expensetracker.data.dao.ExpenseDao
 import com.skolka.expensetracker.data.dao.FeeConfigurationDao
@@ -23,7 +25,7 @@ import com.skolka.expensetracker.data.models.SyncMetadata
         Expense::class,
         SyncMetadata::class
     ],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
@@ -45,10 +47,18 @@ abstract class AppDatabase : RoomDatabase() {
                     AppDatabase::class.java,
                     "kindergarten_expense_tracker_db"
                 )
+                    .addMigrations(MIGRATION_1_2)
                     .fallbackToDestructiveMigration()
                     .build()
                 INSTANCE = instance
                 instance
+            }
+        }
+
+        private val MIGRATION_1_2 = object : Migration(1, 2) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL("ALTER TABLE expenses ADD COLUMN receiptNumber TEXT NOT NULL DEFAULT ''")
+                db.execSQL("ALTER TABLE expenses ADD COLUMN supplierName TEXT NOT NULL DEFAULT ''")
             }
         }
     }

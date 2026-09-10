@@ -104,6 +104,9 @@
     <string name="edit_child">Upravit dítě</string>
     <string name="error_icon_content_description">Chyba</string>
     <string name="expense_date">Datum výdaje</string>
+    <string name="expense_list_note">Poznámka: %1$s</string>
+    <string name="expense_list_primary">č. %1$s · %2$s · %3$s</string>
+    <string name="expense_list_supplier">Dodavatel: %1$s</string>
     <string name="expenses">Výdaje</string>
     <string name="export_pdf">Exportovat PDF</string>
     <string name="export_spreadsheet">Exportovat tabulku</string>
@@ -174,12 +177,15 @@
     <string msgid="7456070600745802113" name="nav_app_bar_open_drawer_description">"Otevřít vysouvací panel navigace"</string>
     <string name="no_children">Nejprve přidejte alespoň jedno dítě.</string>
     <string name="no_data">Zatím žádné záznamy</string>
+    <string name="not_available">Neuvedeno</string>
     <string name="not_paid">Nezaplaceno</string>
+    <string name="note">Poznámka</string>
     <string name="paid_full">Zaplaceno</string>
     <string name="paid_partial">Částečně zaplaceno</string>
     <string name="password_toggle_content_description">Zobrazit heslo</string>
     <string name="payment_status">Stav plateb</string>
     <string name="payments">Platby</string>
+    <string name="receipt_number">Pořadové č.</string>
     <string name="remaining">Zbývá</string>
     <string name="report_child">Dítě</string>
     <string name="report_paid">Zaplaceno</string>
@@ -196,6 +202,7 @@
     <string name="settings">Nastavení</string>
     <string name="split_fee">Povolit dvě pololetní splátky</string>
     <string msgid="6277540029070332960" name="status_bar_notification_info_overflow">"999+"</string>
+    <string name="supplier_name">Název dodavatele</string>
     <string name="take_photo">Vyfotit</string>
     <string name="total_collected">Vybráno</string>
     <string name="total_expected">Očekáváno</string>

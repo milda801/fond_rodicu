@@ -73,6 +73,13 @@
     <string name="report_child">Child</string>
     <string name="report_paid">Paid</string>
     <string name="expense_date">Expense date</string>
+    <string name="receipt_number">Count #</string>
+    <string name="supplier_name">Supplier name</string>
+    <string name="note">Note</string>
+    <string name="not_available">Not available</string>
+    <string name="expense_list_primary">#%1$s · %2$s · %3$s</string>
+    <string name="expense_list_supplier">Supplier: %1$s</string>
+    <string name="expense_list_note">Note: %1$s</string>
     <string-array name="language_options">
         <item>@string/language_english</item>
         <item>@string/language_czech</item>
