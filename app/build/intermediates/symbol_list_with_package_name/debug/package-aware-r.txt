@@ -83,6 +83,7 @@ animator nav_default_enter_anim
 animator nav_default_exit_anim
 animator nav_default_pop_enter_anim
 animator nav_default_pop_exit_anim
+array language_options
 attr SharedValue
 attr SharedValueId
 attr action
@@ -3388,6 +3389,7 @@ id item_touch_helper_previous_elevation
 id jumpToEnd
 id jumpToStart
 id labeled
+id languageInput
 id layout
 id left
 id leftToRight
@@ -3925,7 +3927,9 @@ string appbar_scrolling_view_behavior
 string automatic_backup_configured
 string automatic_backup_not_configured
 string automatic_reports
+string backup_read_error
 string backup_restored
+string backup_saved
 string bottom_sheet_behavior
 string bottomsheet_action_collapse
 string bottomsheet_action_expand
@@ -3984,6 +3988,7 @@ string disable_backup_confirmation
 string edit_child
 string error_a11y_label
 string error_icon_content_description
+string expense_date
 string expenses
 string export_pdf
 string export_spreadsheet
@@ -3997,6 +4002,10 @@ string invalid_academic_year
 string invalid_entry
 string invalid_fee_settings
 string item_view_role_description
+string language
+string language_czech
+string language_description
+string language_english
 string last_backup_error
 string last_backup_success
 string long_press_to_delete
@@ -4114,6 +4123,10 @@ string path_password_strike_through
 string payment_status
 string payments
 string remaining
+string report_child
+string report_paid
+string report_summary
+string report_title
 string reports
 string restore_backup
 string save
@@ -5416,3 +5429,4 @@ styleable include constraintSet
 xml backup_rules
 xml data_extraction_rules
 xml file_paths
+xml locales_config

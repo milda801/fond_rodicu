@@ -9,6 +9,8 @@ import android.widget.Toast
 import android.widget.EditText
 import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.os.LocaleListCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.skolka.expensetracker.ExpenseTrackerApplication
@@ -21,6 +23,7 @@ import kotlinx.coroutines.launch
 import java.time.LocalDate
 import com.google.android.material.materialswitch.MaterialSwitch
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.textfield.MaterialAutoCompleteTextView
 
 class SettingsFragment : Fragment() {
     private var pendingBackupJson: String? = null
@@ -40,7 +43,7 @@ class SettingsFragment : Fragment() {
             BackupPreferences.saveSuccess(requireContext(), java.time.Instant.now().toString())
             BackupScheduler.schedule(requireContext())
             updateBackupStatus(requireView())
-            Toast.makeText(requireContext(), "Backup saved", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), R.string.backup_saved, Toast.LENGTH_SHORT).show()
         }
         pendingBackupJson = null
     }
@@ -50,7 +53,7 @@ class SettingsFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             val result = runCatching {
                 val json = requireContext().contentResolver.openInputStream(uri)?.bufferedReader()?.use { it.readText() }
-                    ?: error("Could not read backup")
+                    ?: error(getString(R.string.backup_read_error))
                 BackupService(app.childRepository, app.feeRepository, app.paymentRepository, app.expenseRepository).restoreJson(json)
             }
             Toast.makeText(
@@ -65,6 +68,7 @@ class SettingsFragment : Fragment() {
         inflater.inflate(R.layout.fragment_settings, container, false)
 
     override fun onViewCreated(view: View, state: Bundle?) {
+        configureLanguageSelector(view)
         view.findViewById<View>(R.id.saveFeeButton).setOnClickListener {
             val year = view.findViewById<EditText>(R.id.academicYearInput).text.toString().trim()
             val amount = view.findViewById<EditText>(R.id.yearlyFeeInput).text.toString().toDoubleOrNull()
@@ -144,6 +148,26 @@ class SettingsFragment : Fragment() {
         splitSwitch.setOnCheckedChangeListener { _, _ -> updateDueDateAvailability() }
         updateDueDateAvailability()
         updateBackupStatus(view)
+    }
+
+    private fun configureLanguageSelector(view: View) {
+        val languageInput = view.findViewById<MaterialAutoCompleteTextView>(R.id.languageInput)
+        val languageLabels = resources.getStringArray(R.array.language_options)
+        languageInput.setSimpleItems(languageLabels)
+
+        val currentTag = AppCompatDelegate.getApplicationLocales().toLanguageTags()
+            .substringBefore(',')
+            .ifBlank { resources.configuration.locales[0].language }
+        languageInput.setText(
+            languageLabels[if (currentTag.startsWith("cs")) 1 else 0],
+            false
+        )
+        languageInput.setOnItemClickListener { _, _, position, _ ->
+            val selectedTag = if (position == 1) "cs" else "en"
+            if (!currentTag.startsWith(selectedTag)) {
+                AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags(selectedTag))
+            }
+        }
     }
 
     private fun updateBackupStatus(view: View) {

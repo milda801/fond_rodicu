@@ -438,6 +438,14 @@ dependencies {
 - [x] Support for system text size settings through scalable `sp` typography
 - [ ] Complete text descriptions for all meaningful images and controls
 
+### Localization
+- [x] Keep canonical English resources in `res/values/strings.xml`.
+- [x] Keep editable Czech translations in `res/values-cs/strings.xml`.
+- [x] Start the app in Czech unless the user has previously selected another app language.
+- [x] Provide a persisted English/Czech selector in Settings using AndroidX per-app locales.
+- [x] Localize on-screen controls, dialogs, validation messages, backup feedback, and generated CSV/PDF headings.
+- [ ] Have a native Czech speaker review and refine the draft Czech wording.
+
 ---
 
 ## 12. Next Steps

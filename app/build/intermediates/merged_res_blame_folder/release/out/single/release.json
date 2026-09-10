@@ -76,6 +76,10 @@
         "source": "com.skolka.expensetracker.app-main-58:/drawable/ic_app.xml"
     },
     {
+        "merged": "com.skolka.expensetracker.app-merged_res-57:/xml_locales_config.xml.flat",
+        "source": "com.skolka.expensetracker.app-main-58:/xml/locales_config.xml"
+    },
+    {
         "merged": "com.skolka.expensetracker.app-merged_res-57:/drawable_ic_settings.xml.flat",
         "source": "com.skolka.expensetracker.app-main-58:/drawable/ic_settings.xml"
     },

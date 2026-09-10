@@ -11,6 +11,13 @@ Offline-first Android application for tracking kindergarten fees, installments, 
 - Reports: payment status, expense totals, balance, CSV export, PDF export, and Android email/share sheet.
 - Backup: JSON export/import through Android's document picker and daily automatic refresh of a selected Google Drive, Dropbox, or local document.
 - Accessibility: high-contrast light color palette, dark readable body text, larger typography, bold section headings, and clearly differentiated navigation states.
+- Languages: Czech is the initial app language, with an English/Czech selector in Settings and persisted per-app language choice.
+
+## Editing translations
+
+The canonical English text is stored in `app/src/main/res/values/strings.xml`. The editable Czech draft is stored in `app/src/main/res/values-cs/strings.xml`. To improve Czech wording, edit only the text between the tags in the Czech file and keep every `name` attribute unchanged. Positional placeholders such as `%1$s` must also be retained because the app replaces them with runtime values.
+
+When a new English string is added, add a matching entry with the same `name` to the Czech file. The two language files currently contain matching resource keys. Users can change the language under Settings → Language; Android persists the selection and recreates the UI immediately.
 
 ## Build requirements
 

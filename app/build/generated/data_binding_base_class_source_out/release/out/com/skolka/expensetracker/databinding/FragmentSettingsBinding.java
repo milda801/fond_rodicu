@@ -12,6 +12,7 @@ import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.materialswitch.MaterialSwitch;
+import com.google.android.material.textfield.MaterialAutoCompleteTextView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.skolka.expensetracker.R;
 import java.lang.NullPointerException;
@@ -38,6 +39,9 @@ public final class FragmentSettingsBinding implements ViewBinding {
   public final TextInputEditText firstHalfDueDateInput;
 
   @NonNull
+  public final MaterialAutoCompleteTextView languageInput;
+
+  @NonNull
   public final MaterialButton restoreButton;
 
   @NonNull
@@ -55,7 +59,8 @@ public final class FragmentSettingsBinding implements ViewBinding {
   private FragmentSettingsBinding(@NonNull ScrollView rootView,
       @NonNull TextInputEditText academicYearInput, @NonNull MaterialButton backupButton,
       @NonNull TextView backupStatusText, @NonNull MaterialButton disableBackupButton,
-      @NonNull TextInputEditText firstHalfDueDateInput, @NonNull MaterialButton restoreButton,
+      @NonNull TextInputEditText firstHalfDueDateInput,
+      @NonNull MaterialAutoCompleteTextView languageInput, @NonNull MaterialButton restoreButton,
       @NonNull MaterialButton saveFeeButton, @NonNull TextInputEditText secondHalfDueDateInput,
       @NonNull MaterialSwitch splitFeeSwitch, @NonNull TextInputEditText yearlyFeeInput) {
     this.rootView = rootView;
@@ -64,6 +69,7 @@ public final class FragmentSettingsBinding implements ViewBinding {
     this.backupStatusText = backupStatusText;
     this.disableBackupButton = disableBackupButton;
     this.firstHalfDueDateInput = firstHalfDueDateInput;
+    this.languageInput = languageInput;
     this.restoreButton = restoreButton;
     this.saveFeeButton = saveFeeButton;
     this.secondHalfDueDateInput = secondHalfDueDateInput;
@@ -128,6 +134,12 @@ public final class FragmentSettingsBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.languageInput;
+      MaterialAutoCompleteTextView languageInput = ViewBindings.findChildViewById(rootView, id);
+      if (languageInput == null) {
+        break missingId;
+      }
+
       id = R.id.restoreButton;
       MaterialButton restoreButton = ViewBindings.findChildViewById(rootView, id);
       if (restoreButton == null) {
@@ -159,8 +171,8 @@ public final class FragmentSettingsBinding implements ViewBinding {
       }
 
       return new FragmentSettingsBinding((ScrollView) rootView, academicYearInput, backupButton,
-          backupStatusText, disableBackupButton, firstHalfDueDateInput, restoreButton,
-          saveFeeButton, secondHalfDueDateInput, splitFeeSwitch, yearlyFeeInput);
+          backupStatusText, disableBackupButton, firstHalfDueDateInput, languageInput,
+          restoreButton, saveFeeButton, secondHalfDueDateInput, splitFeeSwitch, yearlyFeeInput);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

@@ -512,3 +512,22 @@ d:/_actual/099/skolka/
 - [x] Ran `./gradlew clean test assembleDebug --warning-mode all` successfully after the resource and Kotlin updates.
 - [x] All 78 Gradle tasks completed, both unit-test variants passed, and a refreshed debug APK was generated.
 - [x] No Android resource-linking or Kotlin compiler warnings remain; ML Kit's native OCR library continues to be packaged unchanged because it cannot be stripped.
+
+## English/Czech localization - 2026-09-10
+
+### Completed
+- [x] Kept the original English resource catalog in `app/src/main/res/values/strings.xml`.
+- [x] Added a complete matching Czech draft catalog in `app/src/main/res/values-cs/strings.xml` for direct native-speaker editing.
+- [x] Configured Czech and English as supported application locales and made Czech the initial language when no preference has been saved.
+- [x] Added a Language section in Settings with English and Czech choices.
+- [x] Used AndroidX per-app locales so the selection persists and updates the interface immediately.
+- [x] Replaced user-visible hardcoded backup messages and report headings with localized resources.
+- [x] Localized generated CSV headers and PDF labels according to the active app language.
+
+### Translation maintenance
+- [x] Verified that the English and Czech catalogs contain exactly the same 81 resource keys.
+- [ ] Review and refine the Czech wording in `app/src/main/res/values-cs/strings.xml`; resource names and `%1$s` placeholders must remain unchanged.
+
+### Verification
+- [x] Ran `./gradlew test assembleDebug --warning-mode all` successfully after stopping stale Gradle daemons that temporarily held build-output files open.
+- [x] All 76 executed Gradle tasks completed, both unit-test variants passed, and the localized debug APK was generated.

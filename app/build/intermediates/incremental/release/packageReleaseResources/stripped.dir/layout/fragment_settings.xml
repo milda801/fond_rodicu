@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="match_parent" android:background="@color/surface">
     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="@dimen/spacing_md">
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/language" android:textAppearance="@style/TextAppearance.Kindergarten.TitleLarge" />
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="@dimen/spacing_sm" android:text="@string/language_description" android:textAppearance="@style/TextAppearance.Kindergarten.BodyMedium" />
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacing_lg"
+            android:hint="@string/language">
+            <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                android:id="@+id/languageInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none" />
+        </com.google.android.material.textfield.TextInputLayout>
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/yearly_fee" android:textAppearance="@style/TextAppearance.Kindergarten.TitleLarge" />
         <com.google.android.material.textfield.TextInputLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="@string/academic_year"><com.google.android.material.textfield.TextInputEditText android:id="@+id/academicYearInput" android:layout_width="match_parent" android:layout_height="wrap_content" /></com.google.android.material.textfield.TextInputLayout>
         <com.google.android.material.textfield.TextInputLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="@string/yearly_fee"><com.google.android.material.textfield.TextInputEditText android:id="@+id/yearlyFeeInput" android:layout_width="match_parent" android:layout_height="wrap_content" android:inputType="numberDecimal" /></com.google.android.material.textfield.TextInputLayout>

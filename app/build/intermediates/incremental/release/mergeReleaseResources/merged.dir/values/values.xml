@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:ns1="http://schemas.android.com/tools" xmlns:ns2="urn:oasis:names:tc:xliff:document:1.2">
+    <string-array name="language_options">
+        <item>@string/language_english</item>
+        <item>@string/language_czech</item>
+    </string-array>
     <attr format="enum" name="animateCircleAngleTo">
         <enum name="bestChoice" value="0"/>
         <enum name="closest" value="1"/>
@@ -2005,7 +2009,9 @@
     <string name="automatic_backup_configured">Automatic backup destination: %1$s</string>
     <string name="automatic_backup_not_configured">Automatic backup is not configured.</string>
     <string name="automatic_reports">Automatic reports</string>
+    <string name="backup_read_error">Could not read backup</string>
     <string name="backup_restored">Backup restored</string>
+    <string name="backup_saved">Backup saved</string>
     <string name="bottom_sheet_behavior" translatable="false">com.google.android.material.bottomsheet.BottomSheetBehavior</string>
     <string description="A description of an accessibility action to collapse the bottom sheet [CHAR LIMIT=NONE]" name="bottomsheet_action_collapse">Collapse the bottom sheet</string>
     <string description="A description of an accessibility action to expand the bottom sheet [CHAR LIMIT=NONE]" name="bottomsheet_action_expand">Expand the bottom sheet</string>
@@ -2066,6 +2072,7 @@
     Error: invalid
   </string>
     <string name="error_icon_content_description">Error</string>
+    <string name="expense_date">Expense date</string>
     <string name="expenses">Expenses</string>
     <string name="export_pdf">Export PDF</string>
     <string name="export_spreadsheet">Export spreadsheet</string>
@@ -2079,6 +2086,10 @@
     <string name="invalid_entry">Check all required fields and enter a positive amount and valid date.</string>
     <string name="invalid_fee_settings">Enter a valid year, positive fee, and valid due dates.</string>
     <string name="item_view_role_description">Tab</string>
+    <string name="language">Language</string>
+    <string name="language_czech">Czech</string>
+    <string name="language_description">Choose the language used by the application.</string>
+    <string name="language_english">English</string>
     <string name="last_backup_error">Last backup error: %1$s</string>
     <string name="last_backup_success">Last successful backup: %1$s</string>
     <string name="long_press_to_delete">Long-press an item to delete it.</string>
@@ -2202,6 +2213,10 @@
     <string name="payment_status">Payment status</string>
     <string name="payments">Payments</string>
     <string name="remaining">Remaining</string>
+    <string name="report_child">Child</string>
+    <string name="report_paid">Paid</string>
+    <string name="report_summary">Summary</string>
+    <string name="report_title">Kindergarten financial report</string>
     <string name="reports">Reports</string>
     <string name="restore_backup">Restore backup</string>
     <string name="save">Save</string>

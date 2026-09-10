@@ -3,6 +3,7 @@ package com.skolka.expensetracker.services.export
 import android.content.Context
 import android.graphics.Paint
 import android.graphics.pdf.PdfDocument
+import com.skolka.expensetracker.R
 import com.skolka.expensetracker.ui.viewmodel.ReportData
 import java.io.File
 import java.io.FileOutputStream
@@ -14,20 +15,20 @@ class ReportExporter(private val context: Context) {
     fun createCsv(data: ReportData): File {
         val file = File(reportDirectory, "kindergarten-report.csv")
         file.bufferedWriter().use { writer ->
-            writer.appendLine("Summary")
-            writer.appendLine("Expected,${data.totalExpected}")
-            writer.appendLine("Collected,${data.totalCollected}")
-            writer.appendLine("Expenses,${data.totalExpenses}")
-            writer.appendLine("Balance,${data.balance}")
+            writer.appendLine(context.getString(R.string.report_summary))
+            writer.appendLine("${csv(context.getString(R.string.total_expected))},${data.totalExpected}")
+            writer.appendLine("${csv(context.getString(R.string.total_collected))},${data.totalCollected}")
+            writer.appendLine("${csv(context.getString(R.string.total_expenses))},${data.totalExpenses}")
+            writer.appendLine("${csv(context.getString(R.string.current_balance))},${data.balance}")
             writer.appendLine()
-            writer.appendLine("Child,Expected,Paid,Remaining")
+            writer.appendLine(listOf(R.string.report_child, R.string.total_expected, R.string.report_paid, R.string.remaining).joinToString(",") { csv(context.getString(it)) })
             data.children.forEach { child ->
                 val paid = data.payments.filter { it.childId == child.id }.sumOf { it.amount }
                 val expected = data.feeConfig?.yearlyFeeAmount ?: 0.0
                 writer.appendLine("${csv(child.name)},$expected,$paid,${(expected - paid).coerceAtLeast(0.0)}")
             }
             writer.appendLine()
-            writer.appendLine("Expense date,Category,Description,Amount")
+            writer.appendLine(listOf(R.string.expense_date, R.string.category, R.string.description, R.string.amount).joinToString(",") { csv(context.getString(it)) })
             data.expenses.forEach { expense ->
                 writer.appendLine("${csv(expense.expenseDate)},${csv(expense.category)},${csv(expense.description)},${expense.amount}")
             }
@@ -59,20 +60,20 @@ class ReportExporter(private val context: Context) {
         }
 
         val money = NumberFormat.getCurrencyInstance()
-        line("Kindergarten financial report", true)
-        line("Expected: ${money.format(data.totalExpected)}")
-        line("Collected: ${money.format(data.totalCollected)}")
-        line("Expenses: ${money.format(data.totalExpenses)}")
-        line("Balance: ${money.format(data.balance)}")
+        line(context.getString(R.string.report_title), true)
+        line("${context.getString(R.string.total_expected)}: ${money.format(data.totalExpected)}")
+        line("${context.getString(R.string.total_collected)}: ${money.format(data.totalCollected)}")
+        line("${context.getString(R.string.total_expenses)}: ${money.format(data.totalExpenses)}")
+        line("${context.getString(R.string.current_balance)}: ${money.format(data.balance)}")
         y += 12f
-        line("Payment status", true)
+        line(context.getString(R.string.payment_status), true)
         data.children.forEach { child ->
             val paid = data.payments.filter { it.childId == child.id }.sumOf { it.amount }
             val expected = data.feeConfig?.yearlyFeeAmount ?: 0.0
-            line("${child.name}: paid ${money.format(paid)}, remaining ${money.format((expected - paid).coerceAtLeast(0.0))}")
+            line("${child.name}: ${context.getString(R.string.report_paid).lowercase()} ${money.format(paid)}, ${context.getString(R.string.remaining).lowercase()} ${money.format((expected - paid).coerceAtLeast(0.0))}")
         }
         y += 12f
-        line("Expenses", true)
+        line(context.getString(R.string.expenses), true)
         data.expenses.forEach { line("${it.expenseDate} | ${it.category} | ${it.description} | ${money.format(it.amount)}") }
         document.finishPage(page)
         FileOutputStream(file).use(document::writeTo)

@@ -62,4 +62,19 @@
     <string name="last_backup_error">Last backup error: %1$s</string>
     <string name="disable_automatic_backup">Disable automatic backup</string>
     <string name="disable_backup_confirmation">Stop daily automatic backup? Existing backup files will not be deleted.</string>
+    <string name="language">Language</string>
+    <string name="language_description">Choose the language used by the application.</string>
+    <string name="language_english">English</string>
+    <string name="language_czech">Czech</string>
+    <string name="backup_saved">Backup saved</string>
+    <string name="backup_read_error">Could not read backup</string>
+    <string name="report_title">Kindergarten financial report</string>
+    <string name="report_summary">Summary</string>
+    <string name="report_child">Child</string>
+    <string name="report_paid">Paid</string>
+    <string name="expense_date">Expense date</string>
+    <string-array name="language_options">
+        <item>@string/language_english</item>
+        <item>@string/language_czech</item>
+    </string-array>
 </resources>
