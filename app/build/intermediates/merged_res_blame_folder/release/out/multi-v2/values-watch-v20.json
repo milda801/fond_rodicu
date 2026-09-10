@@ -1,0 +1,20 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.skolka.expensetracker.app-mergeReleaseResources-55:/values-watch-v20/values-watch-v20.xml",
+            "map": [
+                {
+                    "source": "/home/vscode/.gradle/caches/transforms-3/d5dbd20a0708cdd8047e95a46785afb8/transformed/appcompat-1.6.1/res/values-watch-v20/values-watch-v20.xml",
+                    "from": {
+                        "startLines": "2,5,8",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "55,214,385",
+                        "endLines": "4,7,10",
+                        "endColumns": "12,12,12",
+                        "endOffsets": "209,380,553"
+                    }
+                }
+            ]
+        }
+    ]
+}

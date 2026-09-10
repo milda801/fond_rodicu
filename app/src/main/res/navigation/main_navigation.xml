@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/dashboardFragment">
+    <fragment android:id="@+id/dashboardFragment" android:name="com.skolka.expensetracker.ui.dashboard.DashboardFragment" android:label="@string/dashboard" />
+    <fragment android:id="@+id/paymentsFragment" android:name="com.skolka.expensetracker.ui.payments.PaymentsFragment" android:label="@string/payments" />
+    <fragment android:id="@+id/expensesFragment" android:name="com.skolka.expensetracker.ui.expenses.ExpensesFragment" android:label="@string/expenses" />
+    <fragment android:id="@+id/reportsFragment" android:name="com.skolka.expensetracker.ui.reports.ReportsFragment" android:label="@string/reports" />
+    <fragment android:id="@+id/settingsFragment" android:name="com.skolka.expensetracker.ui.settings.SettingsFragment" android:label="@string/settings" />
+</navigation>
