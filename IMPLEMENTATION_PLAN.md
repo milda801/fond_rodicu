@@ -432,10 +432,11 @@ dependencies {
 - Automatic sync when online
 
 ### Accessibility
-- Large touch targets
-- High contrast colors
-- Text descriptions for images
-- Support for system text size settings
+- [x] Large touch targets
+- [x] High-contrast light palette with explicit foreground colors
+- [x] Readable 16-18sp body text and bold 24-26sp headings
+- [x] Support for system text size settings through scalable `sp` typography
+- [ ] Complete text descriptions for all meaningful images and controls
 
 ---
 

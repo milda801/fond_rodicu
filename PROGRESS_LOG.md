@@ -497,3 +497,18 @@ d:/_actual/099/skolka/
 - [ ] Test camera, OCR, document providers, PDF/CSV sharing, and WorkManager on a physical Android device.
 - [ ] Add payment and expense editing, inactive-child reactivation, configurable currency, and OCR progress/preview polish.
 - [ ] Choose Gmail OAuth or an authenticated backend if unattended scheduled email is required.
+
+## Readability and color refresh - 2026-09-10
+
+### Completed
+- [x] Replaced the muted palette with an explicit high-contrast teal light theme and defined foreground colors for primary, secondary, surface, outline, and error roles.
+- [x] Made the app use a consistent light theme so text does not lose contrast when the phone is in dark mode.
+- [x] Added scalable 16sp body, 18sp prominent body, 24sp title, and 26sp heading styles using Android's system sans-serif font.
+- [x] Applied larger typography and improved line spacing to dashboard totals, transaction rows, report summaries, settings status, empty states, and section headings.
+- [x] Added explicit toolbar title contrast and checked/unchecked bottom-navigation colors.
+- [x] Darkened paid, partial, and unpaid status colors for improved readability on the light surface.
+
+### Verification
+- [x] Ran `./gradlew clean test assembleDebug --warning-mode all` successfully after the resource and Kotlin updates.
+- [x] All 78 Gradle tasks completed, both unit-test variants passed, and a refreshed debug APK was generated.
+- [x] No Android resource-linking or Kotlin compiler warnings remain; ML Kit's native OCR library continues to be packaged unchanged because it cannot be stripped.

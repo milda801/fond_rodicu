@@ -68,6 +68,10 @@
         "source": "com.skolka.expensetracker.app-main-58:/layout/fragment_settings.xml"
     },
     {
+        "merged": "com.skolka.expensetracker.app-merged_res-57:/color_bottom_navigation_item.xml.flat",
+        "source": "com.skolka.expensetracker.app-main-58:/color/bottom_navigation_item.xml"
+    },
+    {
         "merged": "com.skolka.expensetracker.app-merged_res-57:/drawable_ic_app.xml.flat",
         "source": "com.skolka.expensetracker.app-main-58:/drawable/ic_app.xml"
     },

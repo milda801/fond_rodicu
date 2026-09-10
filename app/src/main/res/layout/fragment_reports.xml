@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:padding="@dimen/spacing_md">
-    <TextView android:id="@+id/reportSummary" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/no_data" android:textAppearance="@style/TextAppearance.Material3.BodyLarge" />
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="match_parent" android:background="@color/surface" android:orientation="vertical" android:padding="@dimen/spacing_md">
+    <TextView android:id="@+id/reportSummary" android:layout_width="match_parent" android:layout_height="wrap_content" android:lineSpacingExtra="4dp" android:text="@string/no_data" android:textAppearance="@style/TextAppearance.Kindergarten.BodyLarge" />
     <com.google.android.material.button.MaterialButton android:id="@+id/exportPdfButton" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/spacing_lg" android:text="@string/export_pdf" />
     <com.google.android.material.button.MaterialButton android:id="@+id/exportSpreadsheetButton" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/export_spreadsheet" />
     <com.google.android.material.button.MaterialButton android:id="@+id/emailButton" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/send_email" />

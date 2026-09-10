@@ -1,10 +1,20 @@
 R_DEF: Internal format may change without notice
 local
+color bottom_navigation_item
+color error
+color on_error
+color on_primary
+color on_primary_container
+color on_secondary
+color on_secondary_container
 color on_surface
+color on_surface_variant
+color outline
 color primary
 color primary_container
 color primary_dark
 color secondary
+color secondary_container
 color status_paid
 color status_partial
 color status_unpaid
@@ -139,6 +149,11 @@ string total_collected
 string total_expected
 string total_expenses
 string yearly_fee
+style TextAppearance.Kindergarten.BodyLarge
+style TextAppearance.Kindergarten.BodyMedium
+style TextAppearance.Kindergarten.HeadlineSmall
+style TextAppearance.Kindergarten.LabelLarge
+style TextAppearance.Kindergarten.TitleLarge
 style Theme.KindergartenExpenseTracker
 xml backup_rules
 xml data_extraction_rules

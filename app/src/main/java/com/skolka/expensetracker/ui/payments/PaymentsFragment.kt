@@ -78,8 +78,8 @@ class PaymentsFragment : Fragment() {
                 ui.payments.forEach { payment ->
                     val childName = ui.children.firstOrNull { it.id == payment.childId }?.name ?: "—"
                     list.addView(TextView(requireContext()).apply {
+                        setTextAppearance(R.style.TextAppearance_Kindergarten_BodyLarge)
                         text = "$childName\n${payment.paymentDate}  ${NumberFormat.getCurrencyInstance().format(payment.amount)}"
-                        textSize = 17f
                         setPadding(0, 16, 0, 16)
                         setOnLongClickListener {
                             MaterialAlertDialogBuilder(requireContext()).setMessage(R.string.delete_payment)

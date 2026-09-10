@@ -99,7 +99,8 @@ class ExpensesFragment : Fragment() {
         }
         viewLifecycleOwner.lifecycleScope.launch { viewLifecycleOwner.repeatOnLifecycle(androidx.lifecycle.Lifecycle.State.STARTED) { viewModel.expenseUiState.collect { ui ->
             list.removeAllViews(); ui.expenses.forEach { expense -> list.addView(TextView(requireContext()).apply {
-                text = "${expense.expenseDate}  ${expense.description}\n${NumberFormat.getCurrencyInstance().format(expense.amount)}"; textSize = 17f; setPadding(0, 16, 0, 16)
+                setTextAppearance(R.style.TextAppearance_Kindergarten_BodyLarge)
+                text = "${expense.expenseDate}  ${expense.description}\n${NumberFormat.getCurrencyInstance().format(expense.amount)}"; setPadding(0, 16, 0, 16)
                 setOnLongClickListener {
                     MaterialAlertDialogBuilder(requireContext()).setMessage(R.string.delete_expense).setNegativeButton(R.string.cancel, null).setPositiveButton(R.string.delete) { _, _ ->
                         expense.receiptPath?.let { File(it).delete() }

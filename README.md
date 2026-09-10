@@ -10,6 +10,7 @@ Offline-first Android application for tracking kindergarten fees, installments, 
 - Expenses: manual entry, categories, receipt OCR, list, and deletion.
 - Reports: payment status, expense totals, balance, CSV export, PDF export, and Android email/share sheet.
 - Backup: JSON export/import through Android's document picker and daily automatic refresh of a selected Google Drive, Dropbox, or local document.
+- Accessibility: high-contrast light color palette, dark readable body text, larger typography, bold section headings, and clearly differentiated navigation states.
 
 ## Build requirements
 

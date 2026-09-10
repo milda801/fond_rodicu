@@ -1,14 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <style name="Theme.KindergartenExpenseTracker" parent="Theme.Material3.DayNight.NoActionBar">
+<resources>
+    <style name="Theme.KindergartenExpenseTracker" parent="Theme.Material3.Light.NoActionBar">
         <item name="colorPrimary">@color/primary</item>
+        <item name="colorOnPrimary">@color/on_primary</item>
         <item name="colorPrimaryContainer">@color/primary_container</item>
+        <item name="colorOnPrimaryContainer">@color/on_primary_container</item>
         <item name="colorSecondary">@color/secondary</item>
+        <item name="colorOnSecondary">@color/on_secondary</item>
+        <item name="colorSecondaryContainer">@color/secondary_container</item>
+        <item name="colorOnSecondaryContainer">@color/on_secondary_container</item>
         <item name="android:colorBackground">@color/surface</item>
         <item name="colorSurface">@color/surface</item>
+        <item name="colorSurfaceVariant">@color/surface_variant</item>
+        <item name="colorOnSurface">@color/on_surface</item>
+        <item name="colorOnSurfaceVariant">@color/on_surface_variant</item>
+        <item name="colorOutline">@color/outline</item>
+        <item name="colorError">@color/error</item>
+        <item name="colorOnError">@color/on_error</item>
+        <item name="android:textColorPrimary">@color/on_surface</item>
+        <item name="android:textColorSecondary">@color/on_surface_variant</item>
+        <item name="android:textColorHint">@color/on_surface_variant</item>
         <item name="android:statusBarColor">@color/primary_dark</item>
         <item name="android:navigationBarColor">@color/surface</item>
+        <item name="android:windowLightStatusBar">false</item>
         <item name="android:windowLightNavigationBar">true</item>
-        <item name="android:fontFamily">sans</item>
+        <item name="android:windowBackground">@color/surface</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="fontFamily">sans-serif</item>
+        <item name="textAppearanceBodyLarge">@style/TextAppearance.Kindergarten.BodyLarge</item>
+        <item name="textAppearanceBodyMedium">@style/TextAppearance.Kindergarten.BodyMedium</item>
+        <item name="textAppearanceTitleLarge">@style/TextAppearance.Kindergarten.TitleLarge</item>
+        <item name="textAppearanceHeadlineSmall">@style/TextAppearance.Kindergarten.HeadlineSmall</item>
+        <item name="textAppearanceLabelLarge">@style/TextAppearance.Kindergarten.LabelLarge</item>
+    </style>
+
+    <style name="TextAppearance.Kindergarten.BodyMedium" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">@color/on_surface</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="TextAppearance.Kindergarten.BodyLarge" parent="TextAppearance.Material3.BodyLarge">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">@color/on_surface</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="TextAppearance.Kindergarten.TitleLarge" parent="TextAppearance.Material3.TitleLarge">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">@color/on_surface</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextAppearance.Kindergarten.HeadlineSmall" parent="TextAppearance.Material3.HeadlineSmall">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">@color/on_surface</item>
+        <item name="android:textSize">26sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextAppearance.Kindergarten.LabelLarge" parent="TextAppearance.Material3.LabelLarge">
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textSize">16sp</item>
     </style>
 </resources>

@@ -50,9 +50,9 @@ class DashboardFragment : Fragment() {
                             else -> getString(R.string.not_paid)
                         }
                         statuses.addView(TextView(requireContext()).apply {
+                            setTextAppearance(R.style.TextAppearance_Kindergarten_BodyLarge)
                             text = "${child.name}: $label\n${getString(R.string.total_collected)}: ${money.format(childSummary.paid)} · ${getString(R.string.remaining)}: ${money.format(childSummary.remaining)}" +
                                 if (childSummary.secondHalfOverdue) "\n${getString(R.string.second_half_overdue)}" else ""
-                            textSize = 18f
                             setPadding(0, 16, 0, 16)
                             setTextColor(resources.getColor(when (childSummary.status) {
                                 PaymentStatus.PAID_FULL -> R.color.status_paid

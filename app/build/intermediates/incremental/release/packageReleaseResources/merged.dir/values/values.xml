@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="on_surface">#191C1A</color>
-    <color name="primary">#315C4B</color>
-    <color name="primary_container">#B5F1D3</color>
-    <color name="primary_dark">#1D3B30</color>
-    <color name="secondary">#52634F</color>
-    <color name="status_paid">#2E7D32</color>
-    <color name="status_partial">#EF6C00</color>
-    <color name="status_unpaid">#C62828</color>
-    <color name="surface">#FBFDF8</color>
-    <color name="surface_variant">#DEE5DD</color>
+    <color name="error">#BA1A1A</color>
+    <color name="on_error">#FFFFFF</color>
+    <color name="on_primary">#FFFFFF</color>
+    <color name="on_primary_container">#00201B</color>
+    <color name="on_secondary">#FFFFFF</color>
+    <color name="on_secondary_container">#10201C</color>
+    <color name="on_surface">#161D1B</color>
+    <color name="on_surface_variant">#3D4945</color>
+    <color name="outline">#66736F</color>
+    <color name="primary">#005B4F</color>
+    <color name="primary_container">#C5F1E7</color>
+    <color name="primary_dark">#003D35</color>
+    <color name="secondary">#3F625A</color>
+    <color name="secondary_container">#D2E8E2</color>
+    <color name="status_paid">#126B35</color>
+    <color name="status_partial">#8A4F00</color>
+    <color name="status_unpaid">#A11919</color>
+    <color name="surface">#FAFCFB</color>
+    <color name="surface_variant">#E1E9E6</color>
     <color name="white">#FFFFFF</color>
     <dimen name="card_radius">16dp</dimen>
     <dimen name="spacing_lg">24dp</dimen>
@@ -80,15 +89,63 @@
     <string name="total_expected">Expected</string>
     <string name="total_expenses">Expenses</string>
     <string name="yearly_fee">Yearly fee</string>
-    <style name="Theme.KindergartenExpenseTracker" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="TextAppearance.Kindergarten.BodyLarge" parent="TextAppearance.Material3.BodyLarge">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">@color/on_surface</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+    <style name="TextAppearance.Kindergarten.BodyMedium" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">@color/on_surface</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+    <style name="TextAppearance.Kindergarten.HeadlineSmall" parent="TextAppearance.Material3.HeadlineSmall">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">@color/on_surface</item>
+        <item name="android:textSize">26sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="TextAppearance.Kindergarten.LabelLarge" parent="TextAppearance.Material3.LabelLarge">
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+    <style name="TextAppearance.Kindergarten.TitleLarge" parent="TextAppearance.Material3.TitleLarge">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">@color/on_surface</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="Theme.KindergartenExpenseTracker" parent="Theme.Material3.Light.NoActionBar">
         <item name="colorPrimary">@color/primary</item>
+        <item name="colorOnPrimary">@color/on_primary</item>
         <item name="colorPrimaryContainer">@color/primary_container</item>
+        <item name="colorOnPrimaryContainer">@color/on_primary_container</item>
         <item name="colorSecondary">@color/secondary</item>
+        <item name="colorOnSecondary">@color/on_secondary</item>
+        <item name="colorSecondaryContainer">@color/secondary_container</item>
+        <item name="colorOnSecondaryContainer">@color/on_secondary_container</item>
         <item name="android:colorBackground">@color/surface</item>
         <item name="colorSurface">@color/surface</item>
+        <item name="colorSurfaceVariant">@color/surface_variant</item>
+        <item name="colorOnSurface">@color/on_surface</item>
+        <item name="colorOnSurfaceVariant">@color/on_surface_variant</item>
+        <item name="colorOutline">@color/outline</item>
+        <item name="colorError">@color/error</item>
+        <item name="colorOnError">@color/on_error</item>
+        <item name="android:textColorPrimary">@color/on_surface</item>
+        <item name="android:textColorSecondary">@color/on_surface_variant</item>
+        <item name="android:textColorHint">@color/on_surface_variant</item>
         <item name="android:statusBarColor">@color/primary_dark</item>
         <item name="android:navigationBarColor">@color/surface</item>
+        <item name="android:windowLightStatusBar">false</item>
         <item name="android:windowLightNavigationBar">true</item>
-        <item name="android:fontFamily">sans</item>
+        <item name="android:windowBackground">@color/surface</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="fontFamily">sans-serif</item>
+        <item name="textAppearanceBodyLarge">@style/TextAppearance.Kindergarten.BodyLarge</item>
+        <item name="textAppearanceBodyMedium">@style/TextAppearance.Kindergarten.BodyMedium</item>
+        <item name="textAppearanceTitleLarge">@style/TextAppearance.Kindergarten.TitleLarge</item>
+        <item name="textAppearanceHeadlineSmall">@style/TextAppearance.Kindergarten.HeadlineSmall</item>
+        <item name="textAppearanceLabelLarge">@style/TextAppearance.Kindergarten.LabelLarge</item>
     </style>
 </resources>

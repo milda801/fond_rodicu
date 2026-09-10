@@ -1391,6 +1391,7 @@ color background_floating_material_dark
 color background_floating_material_light
 color background_material_dark
 color background_material_light
+color bottom_navigation_item
 color bright_foreground_disabled_material_dark
 color bright_foreground_disabled_material_light
 color bright_foreground_inverse_material_dark
@@ -1458,6 +1459,7 @@ color dim_foreground_disabled_material_dark
 color dim_foreground_disabled_material_light
 color dim_foreground_material_dark
 color dim_foreground_material_light
+color error
 color error_color_material_dark
 color error_color_material_light
 color foreground_material_dark
@@ -2089,7 +2091,14 @@ color mtrl_textinput_focused_box_stroke_color
 color mtrl_textinput_hovered_box_stroke_color
 color notification_action_color_filter
 color notification_icon_bg_color
+color on_error
+color on_primary
+color on_primary_container
+color on_secondary
+color on_secondary_container
 color on_surface
+color on_surface_variant
+color outline
 color primary
 color primary_container
 color primary_dark
@@ -2104,6 +2113,7 @@ color primary_text_disabled_material_light
 color ripple_material_dark
 color ripple_material_light
 color secondary
+color secondary_container
 color secondary_text_default_material_dark
 color secondary_text_default_material_light
 color secondary_text_disabled_material_dark
@@ -4583,6 +4593,11 @@ style TextAppearance_Design_Prefix
 style TextAppearance_Design_Snackbar_Message
 style TextAppearance_Design_Suffix
 style TextAppearance_Design_Tab
+style TextAppearance_Kindergarten_BodyLarge
+style TextAppearance_Kindergarten_BodyMedium
+style TextAppearance_Kindergarten_HeadlineSmall
+style TextAppearance_Kindergarten_LabelLarge
+style TextAppearance_Kindergarten_TitleLarge
 style TextAppearance_M3_Sys_Typescale_BodyLarge
 style TextAppearance_M3_Sys_Typescale_BodyMedium
 style TextAppearance_M3_Sys_Typescale_BodySmall
