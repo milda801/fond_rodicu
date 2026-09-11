@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.viewbinding.ViewBinding;
@@ -30,7 +31,13 @@ public final class DialogExpenseBinding implements ViewBinding {
   public final TextInputEditText expenseDateInput;
 
   @NonNull
+  public final TextView expenseFormInstruction;
+
+  @NonNull
   public final TextInputEditText expenseNoteInput;
+
+  @NonNull
+  public final TextView expenseOcrStatus;
 
   @NonNull
   public final TextInputEditText receiptNumberInput;
@@ -43,7 +50,8 @@ public final class DialogExpenseBinding implements ViewBinding {
 
   private DialogExpenseBinding(@NonNull LinearLayout rootView,
       @NonNull TextInputEditText descriptionInput, @NonNull TextInputEditText expenseAmountInput,
-      @NonNull TextInputEditText expenseDateInput, @NonNull TextInputEditText expenseNoteInput,
+      @NonNull TextInputEditText expenseDateInput, @NonNull TextView expenseFormInstruction,
+      @NonNull TextInputEditText expenseNoteInput, @NonNull TextView expenseOcrStatus,
       @NonNull TextInputEditText receiptNumberInput,
       @NonNull MaterialButton scanExpenseReceiptButton,
       @NonNull TextInputEditText supplierNameInput) {
@@ -51,7 +59,9 @@ public final class DialogExpenseBinding implements ViewBinding {
     this.descriptionInput = descriptionInput;
     this.expenseAmountInput = expenseAmountInput;
     this.expenseDateInput = expenseDateInput;
+    this.expenseFormInstruction = expenseFormInstruction;
     this.expenseNoteInput = expenseNoteInput;
+    this.expenseOcrStatus = expenseOcrStatus;
     this.receiptNumberInput = receiptNumberInput;
     this.scanExpenseReceiptButton = scanExpenseReceiptButton;
     this.supplierNameInput = supplierNameInput;
@@ -102,9 +112,21 @@ public final class DialogExpenseBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.expenseFormInstruction;
+      TextView expenseFormInstruction = ViewBindings.findChildViewById(rootView, id);
+      if (expenseFormInstruction == null) {
+        break missingId;
+      }
+
       id = R.id.expenseNoteInput;
       TextInputEditText expenseNoteInput = ViewBindings.findChildViewById(rootView, id);
       if (expenseNoteInput == null) {
+        break missingId;
+      }
+
+      id = R.id.expenseOcrStatus;
+      TextView expenseOcrStatus = ViewBindings.findChildViewById(rootView, id);
+      if (expenseOcrStatus == null) {
         break missingId;
       }
 
@@ -127,8 +149,8 @@ public final class DialogExpenseBinding implements ViewBinding {
       }
 
       return new DialogExpenseBinding((LinearLayout) rootView, descriptionInput, expenseAmountInput,
-          expenseDateInput, expenseNoteInput, receiptNumberInput, scanExpenseReceiptButton,
-          supplierNameInput);
+          expenseDateInput, expenseFormInstruction, expenseNoteInput, expenseOcrStatus,
+          receiptNumberInput, scanExpenseReceiptButton, supplierNameInput);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

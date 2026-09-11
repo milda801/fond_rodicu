@@ -90,6 +90,8 @@
     <string name="common_signin_button_text">Přihlásit se</string>
     <string name="common_signin_button_text_long">Přihlásit se k účtu Google</string>
     <string name="configure_fee_first">Nejprve nastavte roční školné v Nastavení.</string>
+    <string name="confirm_ocr_expense">Kontrola údajů výdaje</string>
+    <string name="confirm_ocr_payment">Kontrola údajů platby</string>
     <string name="current_balance">Zůstatek</string>
     <string name="dashboard">Přehled</string>
     <string name="date">Datum (RRRR-MM-DD)</string>
@@ -102,7 +104,11 @@
     <string name="disable_automatic_backup">Vypnout automatické zálohování</string>
     <string name="disable_backup_confirmation">Zastavit každodenní automatické zálohování? Existující záložní soubory nebudou smazány.</string>
     <string name="edit_child">Upravit dítě</string>
+    <string name="edit_expense">Upravit výdaj</string>
+    <string name="edit_item_instruction">Upravte níže uložené údaje. Stávající fotografie dokladu zůstane zachována, pokud ji nevyfotíte znovu.</string>
+    <string name="edit_payment">Upravit platbu</string>
     <string name="error_icon_content_description">Chyba</string>
+    <string name="existing_receipt_kept">Stávající fotografie dokladu zůstává zachována.</string>
     <string name="expense_date">Datum výdaje</string>
     <string name="expense_list_note">Poznámka: %1$s</string>
     <string name="expense_list_primary">č. %1$s · %2$s · %3$s</string>
@@ -111,6 +117,7 @@
     <string name="export_pdf">Exportovat PDF</string>
     <string name="export_spreadsheet">Exportovat tabulku</string>
     <string name="exposed_dropdown_menu_content_description">Zobrazit rozbalovací nabídku</string>
+    <string name="first_half_amount">Částka za první pololetí</string>
     <string name="first_half_due_date">Splatnost první poloviny (RRRR-MM-DD)</string>
     <string name="icon_content_description">Ikona dialogového okna</string>
     <string name="invalid_academic_year">Použijte formát školního roku RRRR-RRRR, například 2026-2027.</string>
@@ -180,12 +187,21 @@
     <string name="not_available">Neuvedeno</string>
     <string name="not_paid">Nezaplaceno</string>
     <string name="note">Poznámka</string>
+    <string name="number_of_children">Počet dětí</string>
+    <string name="ocr_complete">OCR dokončeno — zkontrolujte a upravte údaje.</string>
+    <string name="ocr_no_text">Na dokladu se nepodařilo najít použitelné údaje. Před uložením je zadejte ručně.</string>
+    <string name="ocr_processing">Načítání dokladu…</string>
+    <string name="ocr_review_instruction">OCR se pokusilo vyplnit údaje z povinné fotografie dokladu. Zkontrolujte a upravte hodnoty, doplňte poznámku a poté položku uložte.</string>
+    <string name="ocr_wait">Počkejte prosím na dokončení rozpoznávání dokladu.</string>
     <string name="paid_full">Zaplaceno</string>
     <string name="paid_partial">Částečně zaplaceno</string>
     <string name="password_toggle_content_description">Zobrazit heslo</string>
+    <string name="payment_receipt_number">Číslo dokladu</string>
     <string name="payment_status">Stav plateb</string>
     <string name="payments">Platby</string>
     <string name="receipt_number">Pořadové č.</string>
+    <string name="receipt_photo">Fotografie dokladu</string>
+    <string name="receipt_photo_required">Před uložením položky je nutné pořídit fotografii dokladu.</string>
     <string name="remaining">Zbývá</string>
     <string name="report_child">Dítě</string>
     <string name="report_paid">Zaplaceno</string>
@@ -193,9 +209,11 @@
     <string name="report_title">Finanční sestava mateřské školy</string>
     <string name="reports">Sestavy</string>
     <string name="restore_backup">Obnovit zálohu</string>
+    <string name="retake_photo">Vyfotit doklad znovu</string>
     <string name="save">Uložit</string>
     <string name="scan_receipt">Naskenovat účtenku</string>
     <string msgid="6264217191555673260" name="search_menu_title">"Hledat"</string>
+    <string name="second_half_amount">Částka za druhé pololetí</string>
     <string name="second_half_due_date">Splatnost druhé poloviny (RRRR-MM-DD)</string>
     <string name="second_half_overdue">Druhá polovina je po splatnosti</string>
     <string name="send_email">Odeslat e-mailem</string>
@@ -204,6 +222,7 @@
     <string msgid="6277540029070332960" name="status_bar_notification_info_overflow">"999+"</string>
     <string name="supplier_name">Název dodavatele</string>
     <string name="take_photo">Vyfotit</string>
+    <string name="tap_to_edit_long_press_to_delete">Klepnutím položku upravíte. Dlouhým stisknutím ji smažete.</string>
     <string name="total_collected">Vybráno</string>
     <string name="total_expected">Očekáváno</string>
     <string name="total_expenses">Výdaje</string>

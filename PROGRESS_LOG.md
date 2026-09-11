@@ -677,6 +677,17 @@ d:/_actual/099/skolka/
 - [x] Ran `./gradlew test assembleDebug --no-daemon --warning-mode all` successfully; all 76 tasks completed, debug and release unit tests passed, and the updated debug APK was generated.
 - [ ] Review pagination and photograph readability using real data on a physical device.
 
+## Czech-only financial exports - 2026-09-11
+
+### Completed
+- [x] Force both XLSX and PDF report labels to resolve from the Czech resource catalog even when the application interface is set to English.
+- [x] Use Czech number formatting in PDF values and Czech document metadata in XLSX files.
+- [x] Keep the application interface language selector unchanged; only generated financial reports are language-fixed.
+
+### Verification pending
+- [x] Ran `./gradlew test assembleDebug --no-daemon --warning-mode all` successfully; all 76 tasks completed, including the Czech export-resource regression test, debug/release unit tests, and debug APK generation.
+- [ ] Export both formats while the application UI is set to English and confirm that all report text remains Czech.
+
 ### Verification
 - [x] Ran `./gradlew test assembleDebug --no-daemon --warning-mode all` successfully; all 76 tasks completed, including debug and release unit tests, and the debug APK was generated.
 - [x] Re-ran the same full verification after moving the summary and adding expense receipt photos; all 76 tasks completed successfully.

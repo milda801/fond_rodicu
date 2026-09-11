@@ -284,6 +284,7 @@ CREATE TABLE sync_metadata (
   - Summary at the top with active-child count, expected amount, collected amount, and current balance
 - Generate future charts/visualizations if requested
 - [x] Generate a matching landscape PDF with summary, payment/expense tables, half-year allocation, receipt photos, and automatic page continuation.
+- [x] Generate both XLSX and PDF financial reports exclusively in Czech, independent of the selected application-interface language.
 - Generate PDF reports with formatted layout
 
 ### 7.2 Email Delivery

@@ -51,6 +51,8 @@
     <string name="choose_receipt">Choose receipt image</string>
     <string name="cloud_backup">Cloud backup</string>
     <string name="configure_fee_first">Configure the yearly fee in Settings first.</string>
+    <string name="confirm_ocr_expense">Confirm expense details</string>
+    <string name="confirm_ocr_payment">Confirm payment details</string>
     <string name="current_balance">Balance</string>
     <string name="dashboard">Dashboard</string>
     <string name="date">Date (YYYY-MM-DD)</string>
@@ -63,6 +65,10 @@
     <string name="disable_automatic_backup">Disable automatic backup</string>
     <string name="disable_backup_confirmation">Stop daily automatic backup? Existing backup files will not be deleted.</string>
     <string name="edit_child">Edit child</string>
+    <string name="edit_expense">Edit expense</string>
+    <string name="edit_item_instruction">Edit the saved values below. The existing receipt photo is kept unless you retake it.</string>
+    <string name="edit_payment">Edit payment</string>
+    <string name="existing_receipt_kept">Existing receipt photo retained.</string>
     <string name="expense_date">Expense date</string>
     <string name="expense_list_note">Note: %1$s</string>
     <string name="expense_list_primary">#%1$s · %2$s · %3$s</string>
@@ -70,6 +76,7 @@
     <string name="expenses">Expenses</string>
     <string name="export_pdf">Export PDF</string>
     <string name="export_spreadsheet">Export spreadsheet</string>
+    <string name="first_half_amount">First half amount</string>
     <string name="first_half_due_date">First-half due date (YYYY-MM-DD)</string>
     <string name="invalid_academic_year">Use academic-year format YYYY-YYYY, for example 2026-2027.</string>
     <string name="invalid_entry">Check all required fields and enter a positive amount and valid date.</string>
@@ -86,11 +93,20 @@
     <string name="not_available">Not available</string>
     <string name="not_paid">Not paid</string>
     <string name="note">Note</string>
+    <string name="number_of_children">Number of children</string>
+    <string name="ocr_complete">OCR complete — check and edit the values.</string>
+    <string name="ocr_no_text">No usable receipt text was found. Enter the values manually before saving.</string>
+    <string name="ocr_processing">Reading receipt…</string>
+    <string name="ocr_review_instruction">OCR has attempted to fill the fields from the required receipt photo. Check and edit the values, add any notes, then save.</string>
+    <string name="ocr_wait">Please wait until receipt recognition finishes.</string>
     <string name="paid_full">Paid</string>
     <string name="paid_partial">Partially paid</string>
+    <string name="payment_receipt_number">Receipt #</string>
     <string name="payment_status">Payment status</string>
     <string name="payments">Payments</string>
     <string name="receipt_number">Count #</string>
+    <string name="receipt_photo">Receipt photo</string>
+    <string name="receipt_photo_required">A receipt photo is required before this item can be saved.</string>
     <string name="remaining">Remaining</string>
     <string name="report_child">Child</string>
     <string name="report_paid">Paid</string>
@@ -98,8 +114,10 @@
     <string name="report_title">Kindergarten financial report</string>
     <string name="reports">Reports</string>
     <string name="restore_backup">Restore backup</string>
+    <string name="retake_photo">Retake receipt photo</string>
     <string name="save">Save</string>
     <string name="scan_receipt">Scan receipt</string>
+    <string name="second_half_amount">Second half amount</string>
     <string name="second_half_due_date">Second-half due date (YYYY-MM-DD)</string>
     <string name="second_half_overdue">Second half is overdue</string>
     <string name="send_email">Send by email</string>
@@ -107,6 +125,7 @@
     <string name="split_fee">Allow two half-year installments</string>
     <string name="supplier_name">Supplier name</string>
     <string name="take_photo">Take photo</string>
+    <string name="tap_to_edit_long_press_to_delete">Tap an item to edit it. Long-press it to delete it.</string>
     <string name="total_collected">Collected</string>
     <string name="total_expected">Expected</string>
     <string name="total_expenses">Expenses</string>

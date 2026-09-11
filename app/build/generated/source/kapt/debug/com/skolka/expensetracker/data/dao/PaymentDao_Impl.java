@@ -51,7 +51,7 @@ public final class PaymentDao_Impl implements PaymentDao {
       @Override
       @NonNull
       protected String createQuery() {
-        return "INSERT OR REPLACE INTO `payments` (`id`,`childId`,`feeConfigId`,`amount`,`paymentDate`,`paymentType`,`receiptPath`,`ocrExtractedName`,`ocrExtractedAmount`,`manualEntry`,`notes`,`createdAt`,`updatedAt`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        return "INSERT OR REPLACE INTO `payments` (`id`,`childId`,`feeConfigId`,`amount`,`paymentDate`,`paymentType`,`receiptPath`,`receiptNumber`,`ocrExtractedName`,`ocrExtractedAmount`,`manualEntry`,`notes`,`createdAt`,`updatedAt`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
       }
 
       @Override
@@ -88,32 +88,37 @@ public final class PaymentDao_Impl implements PaymentDao {
         } else {
           statement.bindString(7, entity.getReceiptPath());
         }
-        if (entity.getOcrExtractedName() == null) {
+        if (entity.getReceiptNumber() == null) {
           statement.bindNull(8);
         } else {
-          statement.bindString(8, entity.getOcrExtractedName());
+          statement.bindString(8, entity.getReceiptNumber());
         }
-        if (entity.getOcrExtractedAmount() == null) {
+        if (entity.getOcrExtractedName() == null) {
           statement.bindNull(9);
         } else {
-          statement.bindDouble(9, entity.getOcrExtractedAmount());
+          statement.bindString(9, entity.getOcrExtractedName());
+        }
+        if (entity.getOcrExtractedAmount() == null) {
+          statement.bindNull(10);
+        } else {
+          statement.bindDouble(10, entity.getOcrExtractedAmount());
         }
         final int _tmp = entity.getManualEntry() ? 1 : 0;
-        statement.bindLong(10, _tmp);
+        statement.bindLong(11, _tmp);
         if (entity.getNotes() == null) {
-          statement.bindNull(11);
-        } else {
-          statement.bindString(11, entity.getNotes());
-        }
-        if (entity.getCreatedAt() == null) {
           statement.bindNull(12);
         } else {
-          statement.bindString(12, entity.getCreatedAt());
+          statement.bindString(12, entity.getNotes());
         }
-        if (entity.getUpdatedAt() == null) {
+        if (entity.getCreatedAt() == null) {
           statement.bindNull(13);
         } else {
-          statement.bindString(13, entity.getUpdatedAt());
+          statement.bindString(13, entity.getCreatedAt());
+        }
+        if (entity.getUpdatedAt() == null) {
+          statement.bindNull(14);
+        } else {
+          statement.bindString(14, entity.getUpdatedAt());
         }
       }
     };
@@ -138,7 +143,7 @@ public final class PaymentDao_Impl implements PaymentDao {
       @Override
       @NonNull
       protected String createQuery() {
-        return "UPDATE OR ABORT `payments` SET `id` = ?,`childId` = ?,`feeConfigId` = ?,`amount` = ?,`paymentDate` = ?,`paymentType` = ?,`receiptPath` = ?,`ocrExtractedName` = ?,`ocrExtractedAmount` = ?,`manualEntry` = ?,`notes` = ?,`createdAt` = ?,`updatedAt` = ? WHERE `id` = ?";
+        return "UPDATE OR ABORT `payments` SET `id` = ?,`childId` = ?,`feeConfigId` = ?,`amount` = ?,`paymentDate` = ?,`paymentType` = ?,`receiptPath` = ?,`receiptNumber` = ?,`ocrExtractedName` = ?,`ocrExtractedAmount` = ?,`manualEntry` = ?,`notes` = ?,`createdAt` = ?,`updatedAt` = ? WHERE `id` = ?";
       }
 
       @Override
@@ -175,37 +180,42 @@ public final class PaymentDao_Impl implements PaymentDao {
         } else {
           statement.bindString(7, entity.getReceiptPath());
         }
-        if (entity.getOcrExtractedName() == null) {
+        if (entity.getReceiptNumber() == null) {
           statement.bindNull(8);
         } else {
-          statement.bindString(8, entity.getOcrExtractedName());
+          statement.bindString(8, entity.getReceiptNumber());
         }
-        if (entity.getOcrExtractedAmount() == null) {
+        if (entity.getOcrExtractedName() == null) {
           statement.bindNull(9);
         } else {
-          statement.bindDouble(9, entity.getOcrExtractedAmount());
+          statement.bindString(9, entity.getOcrExtractedName());
+        }
+        if (entity.getOcrExtractedAmount() == null) {
+          statement.bindNull(10);
+        } else {
+          statement.bindDouble(10, entity.getOcrExtractedAmount());
         }
         final int _tmp = entity.getManualEntry() ? 1 : 0;
-        statement.bindLong(10, _tmp);
+        statement.bindLong(11, _tmp);
         if (entity.getNotes() == null) {
-          statement.bindNull(11);
-        } else {
-          statement.bindString(11, entity.getNotes());
-        }
-        if (entity.getCreatedAt() == null) {
           statement.bindNull(12);
         } else {
-          statement.bindString(12, entity.getCreatedAt());
+          statement.bindString(12, entity.getNotes());
         }
-        if (entity.getUpdatedAt() == null) {
+        if (entity.getCreatedAt() == null) {
           statement.bindNull(13);
         } else {
-          statement.bindString(13, entity.getUpdatedAt());
+          statement.bindString(13, entity.getCreatedAt());
         }
-        if (entity.getId() == null) {
+        if (entity.getUpdatedAt() == null) {
           statement.bindNull(14);
         } else {
-          statement.bindString(14, entity.getId());
+          statement.bindString(14, entity.getUpdatedAt());
+        }
+        if (entity.getId() == null) {
+          statement.bindNull(15);
+        } else {
+          statement.bindString(15, entity.getId());
         }
       }
     };
@@ -326,6 +336,7 @@ public final class PaymentDao_Impl implements PaymentDao {
           final int _cursorIndexOfPaymentDate = CursorUtil.getColumnIndexOrThrow(_cursor, "paymentDate");
           final int _cursorIndexOfPaymentType = CursorUtil.getColumnIndexOrThrow(_cursor, "paymentType");
           final int _cursorIndexOfReceiptPath = CursorUtil.getColumnIndexOrThrow(_cursor, "receiptPath");
+          final int _cursorIndexOfReceiptNumber = CursorUtil.getColumnIndexOrThrow(_cursor, "receiptNumber");
           final int _cursorIndexOfOcrExtractedName = CursorUtil.getColumnIndexOrThrow(_cursor, "ocrExtractedName");
           final int _cursorIndexOfOcrExtractedAmount = CursorUtil.getColumnIndexOrThrow(_cursor, "ocrExtractedAmount");
           final int _cursorIndexOfManualEntry = CursorUtil.getColumnIndexOrThrow(_cursor, "manualEntry");
@@ -372,6 +383,12 @@ public final class PaymentDao_Impl implements PaymentDao {
             } else {
               _tmpReceiptPath = _cursor.getString(_cursorIndexOfReceiptPath);
             }
+            final String _tmpReceiptNumber;
+            if (_cursor.isNull(_cursorIndexOfReceiptNumber)) {
+              _tmpReceiptNumber = null;
+            } else {
+              _tmpReceiptNumber = _cursor.getString(_cursorIndexOfReceiptNumber);
+            }
             final String _tmpOcrExtractedName;
             if (_cursor.isNull(_cursorIndexOfOcrExtractedName)) {
               _tmpOcrExtractedName = null;
@@ -406,7 +423,7 @@ public final class PaymentDao_Impl implements PaymentDao {
             } else {
               _tmpUpdatedAt = _cursor.getString(_cursorIndexOfUpdatedAt);
             }
-            _result = new Payment(_tmpId,_tmpChildId,_tmpFeeConfigId,_tmpAmount,_tmpPaymentDate,_tmpPaymentType,_tmpReceiptPath,_tmpOcrExtractedName,_tmpOcrExtractedAmount,_tmpManualEntry,_tmpNotes,_tmpCreatedAt,_tmpUpdatedAt);
+            _result = new Payment(_tmpId,_tmpChildId,_tmpFeeConfigId,_tmpAmount,_tmpPaymentDate,_tmpPaymentType,_tmpReceiptPath,_tmpReceiptNumber,_tmpOcrExtractedName,_tmpOcrExtractedAmount,_tmpManualEntry,_tmpNotes,_tmpCreatedAt,_tmpUpdatedAt);
           } else {
             _result = null;
           }
@@ -442,6 +459,7 @@ public final class PaymentDao_Impl implements PaymentDao {
           final int _cursorIndexOfPaymentDate = CursorUtil.getColumnIndexOrThrow(_cursor, "paymentDate");
           final int _cursorIndexOfPaymentType = CursorUtil.getColumnIndexOrThrow(_cursor, "paymentType");
           final int _cursorIndexOfReceiptPath = CursorUtil.getColumnIndexOrThrow(_cursor, "receiptPath");
+          final int _cursorIndexOfReceiptNumber = CursorUtil.getColumnIndexOrThrow(_cursor, "receiptNumber");
           final int _cursorIndexOfOcrExtractedName = CursorUtil.getColumnIndexOrThrow(_cursor, "ocrExtractedName");
           final int _cursorIndexOfOcrExtractedAmount = CursorUtil.getColumnIndexOrThrow(_cursor, "ocrExtractedAmount");
           final int _cursorIndexOfManualEntry = CursorUtil.getColumnIndexOrThrow(_cursor, "manualEntry");
@@ -489,6 +507,12 @@ public final class PaymentDao_Impl implements PaymentDao {
             } else {
               _tmpReceiptPath = _cursor.getString(_cursorIndexOfReceiptPath);
             }
+            final String _tmpReceiptNumber;
+            if (_cursor.isNull(_cursorIndexOfReceiptNumber)) {
+              _tmpReceiptNumber = null;
+            } else {
+              _tmpReceiptNumber = _cursor.getString(_cursorIndexOfReceiptNumber);
+            }
             final String _tmpOcrExtractedName;
             if (_cursor.isNull(_cursorIndexOfOcrExtractedName)) {
               _tmpOcrExtractedName = null;
@@ -523,7 +547,7 @@ public final class PaymentDao_Impl implements PaymentDao {
             } else {
               _tmpUpdatedAt = _cursor.getString(_cursorIndexOfUpdatedAt);
             }
-            _item = new Payment(_tmpId,_tmpChildId,_tmpFeeConfigId,_tmpAmount,_tmpPaymentDate,_tmpPaymentType,_tmpReceiptPath,_tmpOcrExtractedName,_tmpOcrExtractedAmount,_tmpManualEntry,_tmpNotes,_tmpCreatedAt,_tmpUpdatedAt);
+            _item = new Payment(_tmpId,_tmpChildId,_tmpFeeConfigId,_tmpAmount,_tmpPaymentDate,_tmpPaymentType,_tmpReceiptPath,_tmpReceiptNumber,_tmpOcrExtractedName,_tmpOcrExtractedAmount,_tmpManualEntry,_tmpNotes,_tmpCreatedAt,_tmpUpdatedAt);
             _result.add(_item);
           }
           return _result;
@@ -562,6 +586,7 @@ public final class PaymentDao_Impl implements PaymentDao {
           final int _cursorIndexOfPaymentDate = CursorUtil.getColumnIndexOrThrow(_cursor, "paymentDate");
           final int _cursorIndexOfPaymentType = CursorUtil.getColumnIndexOrThrow(_cursor, "paymentType");
           final int _cursorIndexOfReceiptPath = CursorUtil.getColumnIndexOrThrow(_cursor, "receiptPath");
+          final int _cursorIndexOfReceiptNumber = CursorUtil.getColumnIndexOrThrow(_cursor, "receiptNumber");
           final int _cursorIndexOfOcrExtractedName = CursorUtil.getColumnIndexOrThrow(_cursor, "ocrExtractedName");
           final int _cursorIndexOfOcrExtractedAmount = CursorUtil.getColumnIndexOrThrow(_cursor, "ocrExtractedAmount");
           final int _cursorIndexOfManualEntry = CursorUtil.getColumnIndexOrThrow(_cursor, "manualEntry");
@@ -609,6 +634,12 @@ public final class PaymentDao_Impl implements PaymentDao {
             } else {
               _tmpReceiptPath = _cursor.getString(_cursorIndexOfReceiptPath);
             }
+            final String _tmpReceiptNumber;
+            if (_cursor.isNull(_cursorIndexOfReceiptNumber)) {
+              _tmpReceiptNumber = null;
+            } else {
+              _tmpReceiptNumber = _cursor.getString(_cursorIndexOfReceiptNumber);
+            }
             final String _tmpOcrExtractedName;
             if (_cursor.isNull(_cursorIndexOfOcrExtractedName)) {
               _tmpOcrExtractedName = null;
@@ -643,7 +674,7 @@ public final class PaymentDao_Impl implements PaymentDao {
             } else {
               _tmpUpdatedAt = _cursor.getString(_cursorIndexOfUpdatedAt);
             }
-            _item = new Payment(_tmpId,_tmpChildId,_tmpFeeConfigId,_tmpAmount,_tmpPaymentDate,_tmpPaymentType,_tmpReceiptPath,_tmpOcrExtractedName,_tmpOcrExtractedAmount,_tmpManualEntry,_tmpNotes,_tmpCreatedAt,_tmpUpdatedAt);
+            _item = new Payment(_tmpId,_tmpChildId,_tmpFeeConfigId,_tmpAmount,_tmpPaymentDate,_tmpPaymentType,_tmpReceiptPath,_tmpReceiptNumber,_tmpOcrExtractedName,_tmpOcrExtractedAmount,_tmpManualEntry,_tmpNotes,_tmpCreatedAt,_tmpUpdatedAt);
             _result.add(_item);
           }
           return _result;
@@ -676,6 +707,7 @@ public final class PaymentDao_Impl implements PaymentDao {
           final int _cursorIndexOfPaymentDate = CursorUtil.getColumnIndexOrThrow(_cursor, "paymentDate");
           final int _cursorIndexOfPaymentType = CursorUtil.getColumnIndexOrThrow(_cursor, "paymentType");
           final int _cursorIndexOfReceiptPath = CursorUtil.getColumnIndexOrThrow(_cursor, "receiptPath");
+          final int _cursorIndexOfReceiptNumber = CursorUtil.getColumnIndexOrThrow(_cursor, "receiptNumber");
           final int _cursorIndexOfOcrExtractedName = CursorUtil.getColumnIndexOrThrow(_cursor, "ocrExtractedName");
           final int _cursorIndexOfOcrExtractedAmount = CursorUtil.getColumnIndexOrThrow(_cursor, "ocrExtractedAmount");
           final int _cursorIndexOfManualEntry = CursorUtil.getColumnIndexOrThrow(_cursor, "manualEntry");
@@ -723,6 +755,12 @@ public final class PaymentDao_Impl implements PaymentDao {
             } else {
               _tmpReceiptPath = _cursor.getString(_cursorIndexOfReceiptPath);
             }
+            final String _tmpReceiptNumber;
+            if (_cursor.isNull(_cursorIndexOfReceiptNumber)) {
+              _tmpReceiptNumber = null;
+            } else {
+              _tmpReceiptNumber = _cursor.getString(_cursorIndexOfReceiptNumber);
+            }
             final String _tmpOcrExtractedName;
             if (_cursor.isNull(_cursorIndexOfOcrExtractedName)) {
               _tmpOcrExtractedName = null;
@@ -757,7 +795,7 @@ public final class PaymentDao_Impl implements PaymentDao {
             } else {
               _tmpUpdatedAt = _cursor.getString(_cursorIndexOfUpdatedAt);
             }
-            _item = new Payment(_tmpId,_tmpChildId,_tmpFeeConfigId,_tmpAmount,_tmpPaymentDate,_tmpPaymentType,_tmpReceiptPath,_tmpOcrExtractedName,_tmpOcrExtractedAmount,_tmpManualEntry,_tmpNotes,_tmpCreatedAt,_tmpUpdatedAt);
+            _item = new Payment(_tmpId,_tmpChildId,_tmpFeeConfigId,_tmpAmount,_tmpPaymentDate,_tmpPaymentType,_tmpReceiptPath,_tmpReceiptNumber,_tmpOcrExtractedName,_tmpOcrExtractedAmount,_tmpManualEntry,_tmpNotes,_tmpCreatedAt,_tmpUpdatedAt);
             _result.add(_item);
           }
           return _result;

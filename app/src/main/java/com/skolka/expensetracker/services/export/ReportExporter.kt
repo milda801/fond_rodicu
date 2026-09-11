@@ -7,37 +7,45 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.pdf.PdfDocument
+import android.os.LocaleList
 import com.skolka.expensetracker.R
 import com.skolka.expensetracker.ui.viewmodel.ReportData
 import java.io.File
 import java.io.FileOutputStream
 import java.text.NumberFormat
+import java.util.Locale
 
 class ReportExporter(private val context: Context) {
     private val reportDirectory = File(context.cacheDir, "reports").apply { mkdirs() }
+    private val czechLocale = Locale.forLanguageTag("cs-CZ")
+    private val exportContext = context.createConfigurationContext(
+        context.resources.configuration.run {
+            android.content.res.Configuration(this).apply { setLocales(LocaleList(czechLocale)) }
+        }
+    )
 
     fun createSpreadsheet(data: ReportData): File {
         val file = File(reportDirectory, "kindergarten-report.xlsx")
         val labels = SpreadsheetLabels(
-            sheetName = context.getString(R.string.report_title),
-            payments = context.getString(R.string.payments),
-            paymentReceiptNumber = context.getString(R.string.payment_receipt_number),
-            childName = context.getString(R.string.child_name),
-            firstHalfAmount = context.getString(R.string.first_half_amount),
-            secondHalfAmount = context.getString(R.string.second_half_amount),
-            receiptPhoto = context.getString(R.string.receipt_photo),
-            expenses = context.getString(R.string.expenses),
-            countNumber = context.getString(R.string.receipt_number),
-            supplier = context.getString(R.string.supplier_name),
-            amount = context.getString(R.string.amount),
-            description = context.getString(R.string.description),
-            note = context.getString(R.string.note),
-            summary = context.getString(R.string.report_summary),
-            numberOfChildren = context.getString(R.string.number_of_children),
-            expectedAmount = context.getString(R.string.total_expected),
-            collectedAmount = context.getString(R.string.total_collected),
-            balance = context.getString(R.string.current_balance),
-            notAvailable = context.getString(R.string.not_available)
+            sheetName = string(R.string.report_title),
+            payments = string(R.string.payments),
+            paymentReceiptNumber = string(R.string.payment_receipt_number),
+            childName = string(R.string.child_name),
+            firstHalfAmount = string(R.string.first_half_amount),
+            secondHalfAmount = string(R.string.second_half_amount),
+            receiptPhoto = string(R.string.receipt_photo),
+            expenses = string(R.string.expenses),
+            countNumber = string(R.string.receipt_number),
+            supplier = string(R.string.supplier_name),
+            amount = string(R.string.amount),
+            description = string(R.string.description),
+            note = string(R.string.note),
+            summary = string(R.string.report_summary),
+            numberOfChildren = string(R.string.number_of_children),
+            expectedAmount = string(R.string.total_expected),
+            collectedAmount = string(R.string.total_collected),
+            balance = string(R.string.current_balance),
+            notAvailable = string(R.string.not_available)
         )
         file.outputStream().buffered().use { ReportSpreadsheetWriter(labels).write(data, it) }
         return file
@@ -60,7 +68,7 @@ class ReportExporter(private val context: Context) {
         var page = document.startPage(PdfDocument.PageInfo.Builder(pageWidth, pageHeight, pageNumber).create())
         var canvas = page.canvas
         var y = margin
-        val money = NumberFormat.getNumberInstance().apply {
+        val money = NumberFormat.getNumberInstance(czechLocale).apply {
             minimumFractionDigits = 2
             maximumFractionDigits = 2
         }
@@ -101,7 +109,7 @@ class ReportExporter(private val context: Context) {
             canvas.drawRect(left, top, left + width, top + height, borderPaint)
             val bitmap = path?.let { decodeSampledBitmap(it, width.toInt() * 2, height.toInt() * 2) }
             if (bitmap == null) {
-                drawCell(context.getString(R.string.not_available), left, top, width, height, bodyPaint)
+                drawCell(string(R.string.not_available), left, top, width, height, bodyPaint)
                 return
             }
             val scale = minOf((width - 6f) / bitmap.width, (height - 6f) / bitmap.height)
@@ -117,12 +125,12 @@ class ReportExporter(private val context: Context) {
             bitmap.recycle()
         }
 
-        section(context.getString(R.string.report_summary), 340f)
+        section(string(R.string.report_summary), 340f)
         listOf(
-            context.getString(R.string.number_of_children) to data.children.size.toString(),
-            context.getString(R.string.total_expected) to money.format(data.totalExpected),
-            context.getString(R.string.total_collected) to money.format(data.totalCollected),
-            context.getString(R.string.current_balance) to money.format(data.balance)
+            string(R.string.number_of_children) to data.children.size.toString(),
+            string(R.string.total_expected) to money.format(data.totalExpected),
+            string(R.string.total_collected) to money.format(data.totalCollected),
+            string(R.string.current_balance) to money.format(data.balance)
         ).forEach { (label, value) ->
             drawCell(label, margin, y, 210f, 22f, headerPaint, headerFill)
             drawCell(value, margin + 210f, y, 130f, 22f, bodyPaint)
@@ -132,11 +140,11 @@ class ReportExporter(private val context: Context) {
 
         val paymentWidths = floatArrayOf(90f, 150f, 115f, 115f, contentWidth - 470f)
         fun paymentHeader() {
-            section(context.getString(R.string.payments))
+            section(string(R.string.payments))
             val headings = listOf(
-                context.getString(R.string.payment_receipt_number), context.getString(R.string.child_name),
-                context.getString(R.string.first_half_amount), context.getString(R.string.second_half_amount),
-                context.getString(R.string.receipt_photo)
+                string(R.string.payment_receipt_number), string(R.string.child_name),
+                string(R.string.first_half_amount), string(R.string.second_half_amount),
+                string(R.string.receipt_photo)
             )
             var x = margin
             headings.forEachIndexed { index, heading ->
@@ -155,7 +163,7 @@ class ReportExporter(private val context: Context) {
             val halves = ReportSpreadsheetWriter.halfYearAmounts(payment, data.feeConfig?.yearlyFeeAmount)
             val values = listOf(
                 payment.receiptNumber,
-                childNames[payment.childId] ?: context.getString(R.string.not_available),
+                childNames[payment.childId] ?: string(R.string.not_available),
                 halves.firstHalf?.let(money::format).orEmpty(),
                 halves.secondHalf?.let(money::format).orEmpty()
             )
@@ -171,11 +179,11 @@ class ReportExporter(private val context: Context) {
 
         val expenseWidths = floatArrayOf(70f, 130f, 80f, 175f, 135f, contentWidth - 590f)
         fun expenseHeader() {
-            section(context.getString(R.string.expenses))
+            section(string(R.string.expenses))
             val headings = listOf(
-                context.getString(R.string.receipt_number), context.getString(R.string.supplier_name),
-                context.getString(R.string.amount), context.getString(R.string.description),
-                context.getString(R.string.note), context.getString(R.string.receipt_photo)
+                string(R.string.receipt_number), string(R.string.supplier_name),
+                string(R.string.amount), string(R.string.description),
+                string(R.string.note), string(R.string.receipt_photo)
             )
             var x = margin
             headings.forEachIndexed { index, heading ->
@@ -216,4 +224,6 @@ class ReportExporter(private val context: Context) {
         }
         return BitmapFactory.decodeFile(path, BitmapFactory.Options().apply { inSampleSize = sampleSize })
     }
+
+    private fun string(resourceId: Int): String = exportContext.getString(resourceId)
 }

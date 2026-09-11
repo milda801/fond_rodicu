@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.viewbinding.ViewBinding;
@@ -31,15 +32,33 @@ public final class DialogPaymentBinding implements ViewBinding {
   public final TextInputEditText paymentDateInput;
 
   @NonNull
+  public final TextView paymentFormInstruction;
+
+  @NonNull
+  public final TextInputEditText paymentNoteInput;
+
+  @NonNull
+  public final TextView paymentOcrStatus;
+
+  @NonNull
+  public final TextInputEditText paymentReceiptNumberInput;
+
+  @NonNull
   public final MaterialButton scanPaymentReceiptButton;
 
   private DialogPaymentBinding(@NonNull LinearLayout rootView, @NonNull Spinner childSpinner,
       @NonNull TextInputEditText paymentAmountInput, @NonNull TextInputEditText paymentDateInput,
+      @NonNull TextView paymentFormInstruction, @NonNull TextInputEditText paymentNoteInput,
+      @NonNull TextView paymentOcrStatus, @NonNull TextInputEditText paymentReceiptNumberInput,
       @NonNull MaterialButton scanPaymentReceiptButton) {
     this.rootView = rootView;
     this.childSpinner = childSpinner;
     this.paymentAmountInput = paymentAmountInput;
     this.paymentDateInput = paymentDateInput;
+    this.paymentFormInstruction = paymentFormInstruction;
+    this.paymentNoteInput = paymentNoteInput;
+    this.paymentOcrStatus = paymentOcrStatus;
+    this.paymentReceiptNumberInput = paymentReceiptNumberInput;
     this.scanPaymentReceiptButton = scanPaymentReceiptButton;
   }
 
@@ -88,6 +107,30 @@ public final class DialogPaymentBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.paymentFormInstruction;
+      TextView paymentFormInstruction = ViewBindings.findChildViewById(rootView, id);
+      if (paymentFormInstruction == null) {
+        break missingId;
+      }
+
+      id = R.id.paymentNoteInput;
+      TextInputEditText paymentNoteInput = ViewBindings.findChildViewById(rootView, id);
+      if (paymentNoteInput == null) {
+        break missingId;
+      }
+
+      id = R.id.paymentOcrStatus;
+      TextView paymentOcrStatus = ViewBindings.findChildViewById(rootView, id);
+      if (paymentOcrStatus == null) {
+        break missingId;
+      }
+
+      id = R.id.paymentReceiptNumberInput;
+      TextInputEditText paymentReceiptNumberInput = ViewBindings.findChildViewById(rootView, id);
+      if (paymentReceiptNumberInput == null) {
+        break missingId;
+      }
+
       id = R.id.scanPaymentReceiptButton;
       MaterialButton scanPaymentReceiptButton = ViewBindings.findChildViewById(rootView, id);
       if (scanPaymentReceiptButton == null) {
@@ -95,7 +138,8 @@ public final class DialogPaymentBinding implements ViewBinding {
       }
 
       return new DialogPaymentBinding((LinearLayout) rootView, childSpinner, paymentAmountInput,
-          paymentDateInput, scanPaymentReceiptButton);
+          paymentDateInput, paymentFormInstruction, paymentNoteInput, paymentOcrStatus,
+          paymentReceiptNumberInput, scanPaymentReceiptButton);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));
