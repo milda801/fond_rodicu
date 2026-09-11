@@ -6,10 +6,10 @@ Offline-first Android application for tracking kindergarten fees, installments, 
 
 - Children: add, rename, and safely deactivate while preserving payment history.
 - Fees: yearly amount, full-year or two-installment mode, and due dates.
-- Payments: manual entry, receipt photo/gallery selection, on-device OCR, status and remaining balance.
-- Expenses: paper receipt count number, date, amount, supplier, description, optional note, receipt OCR, list, and deletion.
-- Reports: payment status, expense totals, balance, CSV export, PDF export, and Android email/share sheet.
-- Backup: JSON export/import through Android's document picker and daily automatic refresh of a selected Google Drive, Dropbox, or local document.
+- Payments: mandatory camera receipt photo; layout-aware Czech cash-receipt OCR for receipt number, payer/child name, total amount, and date; editable review/correction; optional notes, status, remaining balance, editing, and deletion.
+- Expenses: mandatory camera receipt photo, OCR review/correction, paper receipt count number, date, amount, supplier, description, optional note, editing, and deletion.
+- Reports: matching XLSX and PDF financial exports with a summary, separate half-year payment amounts, expense details, and embedded payment/expense receipt photos; Android email/share sheet.
+- Backup: complete JSON export/import—including Base64-encoded receipt images—through Android's document picker and daily automatic refresh of a selected Google Drive, Dropbox, or local document.
 - Accessibility: high-contrast light color palette, dark readable body text, larger typography, bold section headings, and clearly differentiated navigation states.
 - Languages: Czech is the initial app language, with an English/Czech selector in Settings and persisted per-app language choice.
 
@@ -58,6 +58,24 @@ Manual PDF/CSV email sharing is implemented using Android's secure share sheet. 
 - OCR runs on-device using Google ML Kit.
 - The app requests internet/network-state access for cloud document providers and scheduled backup.
 - It does not request broad external-storage, account, or direct camera permissions.
+
+## Receipt workflow
+
+Creating a payment or expense starts the system camera immediately. After a successful photo, on-device OCR attempts to extract relevant fields and opens an editable confirmation form. The user reviews or corrects the OCR result, adds information such as notes, and saves. Saving is blocked until OCR has finished and a non-empty receipt image is attached. Cancelling removes the unsaved photo.
+
+For the standard Czech “PŘÍJMOVÝ POKLADNÍ DOKLAD” payment form, OCR uses both the printed labels and their physical positions to locate the handwritten receipt number, payer name, and total. After the initial full-page pass, the app performs multiple enlarged OCR passes on the three corresponding handwritten field regions, including a color-separation pass that removes the gray/black form and preserves blue or purple pen strokes. Parsed totals are checked against the configured full-year and half-year fee values; an implausible merged number is left blank rather than saved as a payment. This prevents the large preprinted seven-digit form serial from being mistaken for the handwritten receipt order number. The recognized payer is matched against active children without case or Czech-diacritic sensitivity, and the matching child is selected automatically. Receipt numbers are stored and remain editable before saving.
+
+Handwritten OCR remains best-effort and may misread or omit values depending on handwriting, lighting, focus, perspective, and pen color. The confirmation form is therefore authoritative: the user must review and correct the receipt number, child, amount, and date before saving. Further handwriting-recognition tuning is a low-priority enhancement rather than a release blocker.
+
+Tap an existing payment or expense to edit its saved fields. The existing receipt is retained by default; using “Retake receipt photo” replaces it only after the updated record is saved successfully. Cancelling an edit discards a newly taken replacement and preserves the original record and image. Long-press remains the delete action.
+
+Every current payment and expense is expected to have a receipt image. Backup format version 2 embeds those images inside the JSON backup, so restoring recreates both database records and app-private receipt files. A backup is rejected rather than silently omitting a missing image. Legacy format-version-1 backups can still be imported for compatibility, but their historical image paths may not be portable.
+
+## Spreadsheet export
+
+The Reports screen exports a real `.xlsx` workbook with the financial summary at the top, followed by the payment and expense tables on one worksheet. Payment rows contain the receipt number, child name, separate first- and second-half amount columns, and the receipt photograph embedded in the workbook. A payment equal to the configured yearly fee is always divided evenly between the two half-year columns, regardless of its stored installment classification; smaller first- and second-half installment records are placed in their corresponding columns. Expense rows contain the physical count number, supplier, amount, description, note, and embedded expense-receipt photograph. The summary contains the active-child count, expected amount, collected amount, and current balance after expenses.
+
+The PDF export follows the same order and data structure in a landscape table layout. It places the summary first, repeats table headings when payment or expense rows continue onto a new page, and embeds both payment and expense receipt photos while preserving their aspect ratios.
 
 ## Project documentation
 

@@ -17,6 +17,7 @@ import kotlinx.coroutines.launch
 
 data class ReportData(
     val children: List<Child> = emptyList(),
+    val allChildren: List<Child> = emptyList(),
     val payments: List<Payment> = emptyList(),
     val expenses: List<Expense> = emptyList(),
     val feeConfig: FeeConfiguration? = null,
@@ -57,10 +58,11 @@ class ReportViewModel(
                 val feeConfig = feeConfigRepository.getLatestFeeConfig()
                 
                 combine(
-                    childRepository.getAllActiveChildren(),
+                    childRepository.getAllChildren(),
                     paymentRepository.getAllPayments(),
                     expenseRepository.getAllExpenses()
-                ) { children, payments, expenses ->
+                ) { allChildren, payments, expenses ->
+                            val children = allChildren.filter { it.status == "active" }
                             val totalExpected = if (feeConfig != null) {
                                 children.size * feeConfig.yearlyFeeAmount
                             } else {
@@ -79,6 +81,7 @@ class ReportViewModel(
                             
                             val reportData = ReportData(
                                 children = children,
+                                allChildren = allChildren,
                                 payments = payments,
                                 expenses = expenses,
                                 feeConfig = feeConfig,

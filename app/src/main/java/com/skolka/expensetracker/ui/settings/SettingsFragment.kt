@@ -21,6 +21,7 @@ import com.skolka.expensetracker.services.backup.BackupPreferences
 import com.skolka.expensetracker.services.backup.BackupScheduler
 import kotlinx.coroutines.launch
 import java.time.LocalDate
+import java.io.File
 import com.google.android.material.materialswitch.MaterialSwitch
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.MaterialAutoCompleteTextView
@@ -54,7 +55,7 @@ class SettingsFragment : Fragment() {
             val result = runCatching {
                 val json = requireContext().contentResolver.openInputStream(uri)?.bufferedReader()?.use { it.readText() }
                     ?: error(getString(R.string.backup_read_error))
-                BackupService(app.childRepository, app.feeRepository, app.paymentRepository, app.expenseRepository).restoreJson(json)
+                BackupService(app.childRepository, app.feeRepository, app.paymentRepository, app.expenseRepository, File(requireContext().filesDir, "receipts")).restoreJson(json)
             }
             Toast.makeText(
                 requireContext(),
@@ -104,7 +105,7 @@ class SettingsFragment : Fragment() {
         view.findViewById<View>(R.id.backupButton).setOnClickListener {
             val app = requireActivity().application as ExpenseTrackerApplication
             viewLifecycleOwner.lifecycleScope.launch {
-                pendingBackupJson = BackupService(app.childRepository, app.feeRepository, app.paymentRepository, app.expenseRepository).createJson()
+                pendingBackupJson = BackupService(app.childRepository, app.feeRepository, app.paymentRepository, app.expenseRepository, File(requireContext().filesDir, "receipts")).createJson()
                 createBackupDocument.launch("kindergarten-backup-${LocalDate.now()}.json")
             }
         }

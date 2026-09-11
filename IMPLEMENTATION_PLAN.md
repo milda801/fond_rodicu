@@ -40,16 +40,21 @@ Android mobile application for kindergarten expense tracking with cloud backup a
 - **Child Management**: Add/edit/remove children with simple form
 - **Fee Configuration**: Set yearly fee, split option (full/half-year)
 - **Payment Recording**:
-  - Camera capture of payment receipt
-  - OCR extraction (name, amount, date)
-  - Manual entry fallback
-  - Confirmation before saving
+  - Mandatory camera capture of payment receipt before data entry
+  - Layout-aware OCR extraction of receipt number, payer name, amount, and date from the standard Czech cash-receipt form
+  - Automatic payer-name matching to an active child, tolerant of case and Czech diacritics
+  - Editable OCR confirmation and manual correction
+  - Optional notes after OCR review
+  - Saving blocked without an attached receipt image
+  - Existing payments can be edited, reassigned to a child, and optionally given a replacement receipt image
 - **Expense Recording**:
-  - Camera capture of expense receipt
+  - Mandatory camera capture of expense receipt before data entry
   - OCR extraction (vendor, amount, date)
   - Paper receipt count number for physical filing
   - Supplier name, description, and optional note
-  - Manual entry fallback
+  - Editable OCR confirmation and manual correction
+  - Saving blocked without an attached receipt image
+  - Existing expenses can be edited and optionally given a replacement receipt image
 
 ### 2.2 Data Output
 - **Dashboard Screen**:
@@ -57,8 +62,10 @@ Android mobile application for kindergarten expense tracking with cloud backup a
   - Quick stats (total collected, total expenses, balance)
   - Recent activity feed
 - **Reports**:
-  - Payment status report (Excel/PDF)
-  - Expense breakdown report (Excel/PDF)
+  - Payment report in XLSX with receipt number, child, separate half-year amounts, and embedded receipt photo
+  - Expense report in XLSX with count number, supplier, amount, description, note, and embedded receipt photo
+  - XLSX summary at the top of the worksheet with active-child count, expected amount, collected amount, and current balance
+  - Matching landscape PDF report with the summary first, payment and expense tables, repeated page headings, and embedded receipt photos
   - Balance sheet report (Excel/PDF)
 - **Email Export**:
   - Manual export button (send now)
@@ -223,7 +230,15 @@ CREATE TABLE sync_metadata (
      - Payment receipts: name, amount, date
      - Expense receipts: vendor, amount, date
   4. Display extracted data for user confirmation
-  5. Allow manual correction before saving
+   5. Allow manual correction before saving
+
+- **Standard Czech payment receipts**:
+  - Use the stable printed anchors `Doklad číslo`, `Přijato od`, and `Celkem` plus ML Kit line bounding boxes instead of relying on OCR text order.
+  - Perform multiple enlarged OCR passes on the handwritten number, payer, and total regions: original grayscale, several contrast levels, and blue/purple-ink isolation that removes the printed form.
+  - Validate payment totals against configured full-year and half-year fee values and reject implausible merged OCR numbers.
+  - Exclude the preprinted seven-digit form serial from receipt-order-number candidates.
+  - Accept whole-crown notation such as `1800,-` and short handwritten years such as `10. 9. 26`.
+  - Store the parsed payment receipt number and preselect an active child when the parsed payer name matches.
 
 ### 5.2 Accuracy Handling
 - Show confidence score for extracted data
@@ -251,16 +266,24 @@ CREATE TABLE sync_metadata (
 - Restore option with date selection
 - Conflict resolution (keep local/cloud version)
 
+### 6.4 Receipt Image Portability
+- [x] Embed every payment and expense receipt image in JSON backup format version 2 using Base64.
+- [x] Restore embedded images into app-private receipt storage and rewrite record paths.
+- [x] Reject new backups when any record lacks a readable receipt image, preventing silent data loss.
+- [x] Retain import compatibility for legacy format-version-1 backups.
+
 ---
 
 ## 7. Email Export & Scheduling
 
 ### 7.1 Report Generation
-- Generate Excel files with:
-  - Payment status table
-  - Expense breakdown
-  - Balance sheet
-  - Charts/visualizations
+- [x] Generate a standards-based XLSX workbook with:
+  - Payment table with separate first-/second-half amounts and embedded receipt photographs
+  - Treat a payment equal to the configured yearly fee as a full-year payment and divide it evenly across both half-year columns regardless of its stored installment classification
+  - Expense table with physical count number, supplier, amount, description, note, and embedded receipt photographs
+  - Summary at the top with active-child count, expected amount, collected amount, and current balance
+- Generate future charts/visualizations if requested
+- [x] Generate a matching landscape PDF with summary, payment/expense tables, half-year allocation, receipt photos, and automatic page continuation.
 - Generate PDF reports with formatted layout
 
 ### 7.2 Email Delivery
@@ -313,6 +336,7 @@ CREATE TABLE sync_metadata (
 - [ ] Performance optimization
 - [ ] Testing and bug fixes
 - [ ] Release build and signing
+- [ ] **Low priority:** Further improve handwritten payment-receipt OCR accuracy after higher-priority workflows and physical-device release testing are complete
 
 ### Development Environment
 - [x] Add a VS Code Dev Container based on Ubuntu 22.04.
@@ -457,3 +481,4 @@ dependencies {
 2. Complete the remaining usability enhancements listed in `PROGRESS_LOG.md`.
 3. Choose Gmail OAuth or an authenticated backend only if unattended scheduled email is required.
 4. Prepare, sign, and test the release build.
+5. Treat additional handwritten payment-receipt OCR tuning as low priority; keep OCR best-effort and require users to review/edit every result.

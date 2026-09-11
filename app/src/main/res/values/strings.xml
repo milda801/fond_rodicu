@@ -74,12 +74,31 @@
     <string name="report_paid">Paid</string>
     <string name="expense_date">Expense date</string>
     <string name="receipt_number">Count #</string>
+    <string name="payment_receipt_number">Receipt #</string>
     <string name="supplier_name">Supplier name</string>
     <string name="note">Note</string>
     <string name="not_available">Not available</string>
     <string name="expense_list_primary">#%1$s · %2$s · %3$s</string>
     <string name="expense_list_supplier">Supplier: %1$s</string>
     <string name="expense_list_note">Note: %1$s</string>
+    <string name="receipt_photo_required">A receipt photo is required before this item can be saved.</string>
+    <string name="confirm_ocr_payment">Confirm payment details</string>
+    <string name="confirm_ocr_expense">Confirm expense details</string>
+    <string name="ocr_review_instruction">OCR has attempted to fill the fields from the required receipt photo. Check and edit the values, add any notes, then save.</string>
+    <string name="retake_photo">Retake receipt photo</string>
+    <string name="ocr_processing">Reading receipt…</string>
+    <string name="ocr_complete">OCR complete — check and edit the values.</string>
+    <string name="ocr_no_text">No usable receipt text was found. Enter the values manually before saving.</string>
+    <string name="ocr_wait">Please wait until receipt recognition finishes.</string>
+    <string name="edit_payment">Edit payment</string>
+    <string name="edit_expense">Edit expense</string>
+    <string name="edit_item_instruction">Edit the saved values below. The existing receipt photo is kept unless you retake it.</string>
+    <string name="existing_receipt_kept">Existing receipt photo retained.</string>
+    <string name="tap_to_edit_long_press_to_delete">Tap an item to edit it. Long-press it to delete it.</string>
+    <string name="first_half_amount">First half amount</string>
+    <string name="second_half_amount">Second half amount</string>
+    <string name="receipt_photo">Receipt photo</string>
+    <string name="number_of_children">Number of children</string>
     <string-array name="language_options">
         <item>@string/language_english</item>
         <item>@string/language_czech</item>

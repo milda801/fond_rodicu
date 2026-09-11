@@ -82,11 +82,12 @@ class PaymentViewModel(
         }
     }
     
-    fun updatePayment(payment: Payment) {
+    fun updatePayment(payment: Payment, onSuccess: () -> Unit = {}) {
         viewModelScope.launch {
             try {
                 _paymentUiState.value = _paymentUiState.value.copy(isLoading = true)
                 paymentRepository.updatePayment(payment)
+                onSuccess()
                 _paymentUiState.value = _paymentUiState.value.copy(
                     isLoading = false,
                     successMessage = "Payment updated successfully"

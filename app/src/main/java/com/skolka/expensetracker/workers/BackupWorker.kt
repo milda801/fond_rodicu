@@ -13,7 +13,7 @@ class BackupWorker(context: Context, parameters: WorkerParameters) : CoroutineWo
         val uri = BackupPreferences.getUri(applicationContext) ?: return Result.success()
         val app = applicationContext as ExpenseTrackerApplication
         return runCatching {
-            val json = BackupService(app.childRepository, app.feeRepository, app.paymentRepository, app.expenseRepository).createJson()
+            val json = BackupService(app.childRepository, app.feeRepository, app.paymentRepository, app.expenseRepository, java.io.File(applicationContext.filesDir, "receipts")).createJson()
             applicationContext.contentResolver.openOutputStream(uri, "wt")?.bufferedWriter()?.use { it.write(json) }
                 ?: error("Cloud backup destination is unavailable")
             BackupPreferences.saveSuccess(applicationContext, Instant.now().toString())

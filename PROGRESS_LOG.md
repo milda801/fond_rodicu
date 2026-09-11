@@ -549,3 +549,136 @@ d:/_actual/099/skolka/
 - [x] Ran `./gradlew clean test assembleDebug --warning-mode all` successfully after the schema and UI changes.
 - [x] Re-ran `./gradlew test assembleDebug --warning-mode all` after eliminating the migration override warning.
 - [x] Debug and release unit-test variants passed and the updated debug APK was generated without source or resource warnings.
+
+## Mandatory receipt-first OCR workflow - 2026-09-10
+
+### Completed
+- [x] Changed both Add Payment and Add Expense to launch the system camera before opening any entry form.
+- [x] Open the editable confirmation form only after the camera returns a non-empty receipt image.
+- [x] Run on-device OCR automatically, show recognition progress/result, and ask the user to review or correct extracted values.
+- [x] Added an optional payment note so additional information can be entered after OCR review; expense notes remain supported.
+- [x] Block saving while OCR is running or when the receipt image is missing/unreadable.
+- [x] Mark newly saved payment and expense records as scanned rather than manual entries.
+- [x] Allow the required image to be retaken from the confirmation form, deleting the superseded unsaved image.
+- [x] Delete unsaved receipt images when the form is cancelled or its fragment is destroyed.
+- [x] Added matching English and Czech text for the receipt requirement, OCR state, confirmation screens, and retake action.
+
+### Receipt-inclusive backup
+- [x] Upgraded JSON backups to format version 2 and embedded each payment/expense receipt as Base64 data.
+- [x] Reject backup creation if any current record lacks a readable image, rather than producing an incomplete backup.
+- [x] Restore embedded images into app-private storage and assign the new local paths to restored records.
+- [x] Validate that every format-version-2 payment and expense has a corresponding embedded image.
+- [x] Continue accepting legacy format-version-1 backups for backward compatibility.
+
+### Tests and verification
+- [x] Added `ReceiptBackupCodecTest` for byte-for-byte image encode/restore and empty-image rejection.
+- [x] Verified that English and Czech localization catalogs contain the same 90 keys.
+- [x] Ran `./gradlew clean test assembleDebug --warning-mode all` successfully; all 78 tasks completed, debug and release unit tests passed, and the debug APK was generated.
+
+## Layout-aware Czech payment receipt OCR - 2026-09-10
+
+### Completed
+- [x] Specialized payment-receipt parsing around the standard Czech cash-receipt labels `Doklad číslo`, `Přijato od`, and `Celkem`.
+- [x] Extract the handwritten receipt order number, payer name, whole-crown amounts such as `1800,-`, and dates with two-digit years or spaces around separators.
+- [x] Match the OCR payer name against active children without case or Czech-diacritic sensitivity and automatically select the matching child.
+- [x] Added an editable, required payment receipt-number field and persist it in Room, JSON backups, and payment list rows.
+- [x] Added the non-destructive Room 2→3 migration for existing installations.
+- [x] Added focused parser tests modeled on the supplied `PŘÍJMOVÝ POKLADNÍ DOKLAD` receipt and label/value OCR variations.
+
+### Verification
+- [x] Ran the focused debug `ReceiptParserTest` suite successfully; all five parser tests passed.
+- [x] Stopped stale Gradle daemons and removed locked build output after the initial clean task could not delete `app/build`.
+- [x] Ran `./gradlew test assembleDebug --no-daemon --warning-mode all` successfully; all 76 tasks executed, debug and release unit tests passed, and the updated debug APK was generated.
+- [x] No source, Room, resource-linking, or compile-SDK warnings were reported; ML Kit's native OCR library was packaged unchanged because it cannot be stripped.
+
+## Physical receipt OCR correction - 2026-09-10
+
+### Device finding
+- [x] Physical-device testing showed that full-page OCR read the preprinted serial `7430766` as the receipt number and missed the faint handwritten amount, while payer matching and date extraction succeeded.
+
+### Completed
+- [x] Replaced nearby text-order assumptions with ML Kit line bounding-box analysis for the fixed payment form.
+- [x] Added targeted enlarged grayscale/high-contrast OCR passes for the handwritten receipt-number, payer-name, and total-amount regions.
+- [x] Limited receipt order numbers to one through four digits so the large seven-digit preprinted form serial cannot be accepted.
+- [x] Retained full-page and generic parser fallbacks for photos where one or more printed anchors are not detected.
+- [x] Added regression coverage for spatial field extraction, the `7430766` serial conflict, and targeted-region OCR overrides.
+
+### Verification pending
+- [x] Ran the focused debug `ReceiptParserTest` suite successfully; all seven parser tests passed.
+- [x] Ran `./gradlew test assembleDebug --no-daemon --warning-mode all` successfully; debug and release unit tests passed and the corrected debug APK was generated.
+
+## Handwriting color separation and fee validation - 2026-09-10
+
+### Device finding
+- [x] A second physical-device run improved localization but read the handwritten receipt number `3` as `9` and merged the amount with nearby form content into the impossible value `141787`.
+
+### Completed
+- [x] Added a blue/purple-ink isolation OCR pass that turns colored handwriting black while removing gray and black printed form content.
+- [x] Run ink-isolated OCR before three grayscale/contrast variants for each fixed payment field.
+- [x] Validate amount candidates against the configured full-year and half-year fee values.
+- [x] Leave an untrustworthy amount blank instead of prefilling an impossible payment amount.
+- [x] Added parser regression tests for noisy amount selection and rejection.
+
+### Verification pending
+- [x] Ran the focused debug `ReceiptParserTest` suite successfully; all ten parser tests passed.
+- [x] Ran `./gradlew test assembleDebug --no-daemon --warning-mode all` successfully; debug and release unit tests passed and the updated debug APK was generated.
+
+## OCR priority decision - 2026-09-10
+
+### Decision
+- [x] Physical-device testing confirmed that handwritten values on the standard payment receipt remain unreliable despite spatial cropping, multiple preprocessing variants, ink isolation, and fee-aware validation.
+- [x] Reclassified further handwritten payment-receipt OCR accuracy work as **low priority**.
+- [x] OCR remains available as a best-effort convenience, but its output is not authoritative and every result must be reviewed and corrected in the confirmation form before saving.
+- [x] Further OCR model/preprocessing experimentation is not a release blocker and should follow higher-priority physical-device workflow testing and usability work.
+
+## Payment and expense editing - 2026-09-10
+
+### Completed
+- [x] Added tap-to-edit behavior for existing payment and expense list rows while retaining long-press deletion.
+- [x] Payment editing supports receipt number, child, amount, date, note, and optional receipt retake.
+- [x] Expense editing supports receipt count number, date, amount, supplier, description, note, and optional receipt retake.
+- [x] Existing receipt images are preserved when editing values without retaking the photo.
+- [x] A replacement receipt becomes owned by the record only after the database update succeeds; cancelling removes the replacement and preserves the original image.
+- [x] Recalculate payment installment classification while excluding the edited payment from the child's previous total.
+- [x] Added matching English and Czech edit labels, instructions, and list interaction help.
+
+### Verification pending
+- [x] Ran `./gradlew test assembleDebug --no-daemon --warning-mode all` successfully; all 76 tasks completed, debug and release unit tests passed, and the editable-record debug APK was generated.
+
+## XLSX spreadsheet report - 2026-09-11
+
+### Completed
+- [x] Replaced the plain CSV export with a standards-based `.xlsx` workbook generated without a heavyweight spreadsheet dependency.
+- [x] Added a payment table with receipt number, child name, separate first- and second-half amount columns, and receipt photographs embedded in the workbook.
+- [x] Divide full-year payments evenly across both half-year columns while placing installment payments in their recorded half-year column.
+- [x] Added an expense table with physical count number, supplier, amount, description, and note.
+- [x] Added a summary with active-child count, expected amount, collected amount, and current account balance after expenses.
+- [x] Include inactive children when resolving names for historical payment rows while counting only active children in the summary.
+- [x] Added matching English and Czech spreadsheet labels and switched Android sharing to the XLSX MIME type.
+- [x] Added unit coverage for half-year allocation, workbook sections, escaped text, numeric values, and embedded receipt media.
+- [x] Moved the financial summary to the top of the worksheet for immediate visibility.
+- [x] Added a receipt-photo column to the expense table and embed each available expense receipt in its row.
+- [x] Extended workbook tests to verify both payment and expense image media and drawing-column anchors.
+- [x] Treat payments equal to the configured yearly fee as full-year payments in the spreadsheet, dividing 1,800 into 900 for the first half and 900 for the second half even when a historical record is classified as a half-year installment.
+- [x] Added regression coverage for yearly-fee-sized records stored as both first- and second-half payment types.
+
+## Matching PDF financial report - 2026-09-11
+
+### Completed
+- [x] Replaced the former text-only PDF with a landscape, table-based report that follows the XLSX structure.
+- [x] Put the summary first with active-child count, expected amount, collected amount, and balance.
+- [x] Added payment rows with receipt number, child name, separate half-year amounts, and embedded receipt photographs.
+- [x] Reused yearly-fee allocation rules so a payment of 1,800 is displayed as 900 in each half-year column.
+- [x] Added expense rows with count number, supplier, amount, description, note, and embedded receipt photographs.
+- [x] Preserve image aspect ratios, downsample large source photographs, and repeat the appropriate table heading on continuation pages.
+- [x] Generate PDF files on an IO coroutine rather than blocking the main UI thread.
+
+### Verification pending
+- [x] Ran `./gradlew test assembleDebug --no-daemon --warning-mode all` successfully; all 76 tasks completed, debug and release unit tests passed, and the updated debug APK was generated.
+- [ ] Review pagination and photograph readability using real data on a physical device.
+
+### Verification
+- [x] Ran `./gradlew test assembleDebug --no-daemon --warning-mode all` successfully; all 76 tasks completed, including debug and release unit tests, and the debug APK was generated.
+- [x] Re-ran the same full verification after moving the summary and adding expense receipt photos; all 76 tasks completed successfully.
+- [x] Re-ran the full verification after correcting yearly-fee allocation across both half-year columns; all 76 tasks completed successfully.
+- [ ] Open the generated workbook in Microsoft Excel or LibreOffice and verify receipt-photo sizing on a physical device.

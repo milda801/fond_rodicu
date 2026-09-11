@@ -16,6 +16,8 @@ import com.skolka.expensetracker.services.export.ReportExporter
 import com.skolka.expensetracker.ui.viewmodel.ReportData
 import com.skolka.expensetracker.ui.viewmodel.ReportViewModel
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import java.io.File
 import java.text.NumberFormat
 
@@ -32,9 +34,9 @@ class ReportsFragment : Fragment() {
 
     override fun onViewCreated(view: View, state: Bundle?) {
         exporter = ReportExporter(requireContext())
-        view.findViewById<View>(R.id.exportPdfButton).setOnClickListener { share(exporter.createPdf(reportData), "application/pdf") }
-        view.findViewById<View>(R.id.exportSpreadsheetButton).setOnClickListener { share(exporter.createCsv(reportData), "text/csv") }
-        view.findViewById<View>(R.id.emailButton).setOnClickListener { share(exporter.createPdf(reportData), "application/pdf", true) }
+        view.findViewById<View>(R.id.exportPdfButton).setOnClickListener { exportPdf() }
+        view.findViewById<View>(R.id.exportSpreadsheetButton).setOnClickListener { exportSpreadsheet() }
+        view.findViewById<View>(R.id.emailButton).setOnClickListener { exportPdf(emailOnly = true) }
         val summary = view.findViewById<TextView>(R.id.reportSummary)
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(androidx.lifecycle.Lifecycle.State.STARTED) {
@@ -47,6 +49,22 @@ class ReportsFragment : Fragment() {
                         "${getString(R.string.current_balance)}: ${money.format(reportData.balance)}"
                 }
             }
+        }
+    }
+
+    private fun exportSpreadsheet() {
+        val snapshot = reportData
+        viewLifecycleOwner.lifecycleScope.launch {
+            val file = withContext(Dispatchers.IO) { exporter.createSpreadsheet(snapshot) }
+            share(file, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+        }
+    }
+
+    private fun exportPdf(emailOnly: Boolean = false) {
+        val snapshot = reportData
+        viewLifecycleOwner.lifecycleScope.launch {
+            val file = withContext(Dispatchers.IO) { exporter.createPdf(snapshot) }
+            share(file, "application/pdf", emailOnly)
         }
     }
 

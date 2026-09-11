@@ -36,6 +36,7 @@ data class Payment(
     val paymentDate: String,
     val paymentType: String, // full_year, first_half, second_half
     val receiptPath: String? = null,
+    val receiptNumber: String = "",
     val ocrExtractedName: String? = null,
     val ocrExtractedAmount: Double? = null,
     val manualEntry: Boolean = false,

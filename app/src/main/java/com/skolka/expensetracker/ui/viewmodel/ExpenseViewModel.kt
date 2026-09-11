@@ -97,11 +97,12 @@ class ExpenseViewModel(
         }
     }
     
-    fun updateExpense(expense: Expense) {
+    fun updateExpense(expense: Expense, onSuccess: () -> Unit = {}) {
         viewModelScope.launch {
             try {
                 _expenseUiState.value = _expenseUiState.value.copy(isLoading = true)
                 expenseRepository.updateExpense(expense)
+                onSuccess()
                 _expenseUiState.value = _expenseUiState.value.copy(
                     isLoading = false,
                     successMessage = "Expense updated successfully"
