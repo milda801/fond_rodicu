@@ -68,6 +68,7 @@
     <string name="edit_expense">Edit expense</string>
     <string name="edit_item_instruction">Edit the saved values below. The existing receipt photo is kept unless you retake it.</string>
     <string name="edit_payment">Edit payment</string>
+    <string name="enrollment_date">Enrollment date (YYYY-MM-DD)</string>
     <string name="existing_receipt_kept">Existing receipt photo retained.</string>
     <string name="expense_date">Expense date</string>
     <string name="expense_list_note">Note: %1$s</string>
@@ -78,6 +79,13 @@
     <string name="export_spreadsheet">Export spreadsheet</string>
     <string name="first_half_amount">First half amount</string>
     <string name="first_half_due_date">First-half due date (YYYY-MM-DD)</string>
+    <string name="import_action">Import</string>
+    <string name="import_children">Import children</string>
+    <string name="import_children_hint">Jana Nováková\nPetr Svoboda\nEliška Dvořáková</string>
+    <string name="import_children_instruction">Paste one child name per line. Empty lines and duplicate names are skipped. All imported children receive the enrollment date below.</string>
+    <string name="import_children_invalid">Paste at least one new name and enter a valid enrollment date.</string>
+    <string name="import_children_preview">Ready to import: %1$d · Duplicates skipped: %2$d</string>
+    <string name="import_children_result">Imported: %1$d · Duplicates skipped: %2$d</string>
     <string name="invalid_academic_year">Use academic-year format YYYY-YYYY, for example 2026-2027.</string>
     <string name="invalid_entry">Check all required fields and enter a positive amount and valid date.</string>
     <string name="invalid_fee_settings">Enter a valid year, positive fee, and valid due dates.</string>

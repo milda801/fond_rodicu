@@ -688,6 +688,20 @@ d:/_actual/099/skolka/
 - [x] Ran `./gradlew test assembleDebug --no-daemon --warning-mode all` successfully; all 76 tasks completed, including the Czech export-resource regression test, debug/release unit tests, and debug APK generation.
 - [ ] Export both formats while the application UI is set to English and confirm that all report text remains Czech.
 
+## Bulk paste child import - 2026-09-11
+
+### Completed
+- [x] Added an Import children action to the Dashboard alongside individual child creation.
+- [x] Added a multiline dialog accepting one pasted child name per line and one shared enrollment date.
+- [x] Normalize repeated whitespace and ignore blank lines.
+- [x] Skip duplicates against existing active children and earlier pasted lines without case or Czech-diacritic sensitivity.
+- [x] Show a live preview of importable and skipped duplicate counts and a completion result after insertion.
+- [x] Added matching English and Czech resources and focused parser tests.
+
+### Verification pending
+- [x] Ran `./gradlew test assembleDebug --no-daemon --warning-mode all` successfully; all 76 tasks completed, including bulk-name parser tests, debug/release unit tests, and debug APK generation.
+- [ ] Verify copy/paste behavior with names copied from common email and spreadsheet applications on a physical device.
+
 ### Verification
 - [x] Ran `./gradlew test assembleDebug --no-daemon --warning-mode all` successfully; all 76 tasks completed, including debug and release unit tests, and the debug APK was generated.
 - [x] Re-ran the same full verification after moving the summary and adding expense receipt photos; all 76 tasks completed successfully.

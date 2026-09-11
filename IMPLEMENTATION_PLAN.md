@@ -37,7 +37,7 @@ Android mobile application for kindergarten expense tracking with cloud backup a
 ## 2. Core Features
 
 ### 2.1 Data Input
-- **Child Management**: Add/edit/remove children with simple form
+- **Child Management**: Add/edit/deactivate children with a simple form and bulk-import names by pasting one child per line
 - **Fee Configuration**: Set yearly fee, split option (full/half-year)
 - **Payment Recording**:
   - Mandatory camera capture of payment receipt before data entry
@@ -312,6 +312,7 @@ CREATE TABLE sync_metadata (
 - [x] Project setup and dependencies
 - [ ] Database schema and Room ORM
 - [ ] Child management (CRUD)
+- [x] Bulk paste import for child names with shared enrollment date and normalized duplicate detection
 - [ ] Manual payment entry
 - [ ] Manual expense entry
 - [ ] Basic dashboard

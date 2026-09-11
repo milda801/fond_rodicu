@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="wrap_content">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="16dp">
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/import_children_instruction" android:textAppearance="@style/TextAppearance.Kindergarten.BodyMedium" />
+        <EditText android:id="@+id/childrenNamesInput" android:layout_width="match_parent" android:layout_height="180dp" android:layout_marginTop="12dp" android:gravity="top|start" android:hint="@string/import_children_hint" android:inputType="textCapWords|textMultiLine" android:minLines="7" android:scrollbars="vertical" />
+        <EditText android:id="@+id/childrenEnrollmentDateInput" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp" android:hint="@string/enrollment_date" android:inputType="date" />
+        <TextView android:id="@+id/importChildrenPreview" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp" android:textAppearance="@style/TextAppearance.Kindergarten.BodyMedium" />
+    </LinearLayout>
+</ScrollView>

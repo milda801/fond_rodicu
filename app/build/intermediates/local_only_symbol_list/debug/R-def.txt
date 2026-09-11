@@ -45,6 +45,8 @@ id backupStatusText
 id bottomNavigation
 id childNameInput
 id childSpinner
+id childrenEnrollmentDateInput
+id childrenNamesInput
 id dashboardFragment
 id descriptionInput
 id disableBackupButton
@@ -60,6 +62,8 @@ id expensesFragment
 id exportPdfButton
 id exportSpreadsheetButton
 id firstHalfDueDateInput
+id importChildrenButton
+id importChildrenPreview
 id languageInput
 id main_navigation
 id navHost
@@ -89,6 +93,7 @@ id yearlyFeeInput
 layout activity_main
 layout dialog_child
 layout dialog_expense
+layout dialog_import_children
 layout dialog_payment
 layout fragment_dashboard
 layout fragment_expenses
@@ -134,6 +139,7 @@ string edit_child
 string edit_expense
 string edit_item_instruction
 string edit_payment
+string enrollment_date
 string existing_receipt_kept
 string expense_date
 string expense_list_note
@@ -144,6 +150,13 @@ string export_pdf
 string export_spreadsheet
 string first_half_amount
 string first_half_due_date
+string import_action
+string import_children
+string import_children_hint
+string import_children_instruction
+string import_children_invalid
+string import_children_preview
+string import_children_result
 string invalid_academic_year
 string invalid_entry
 string invalid_fee_settings

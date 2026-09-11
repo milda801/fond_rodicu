@@ -4,7 +4,7 @@ Offline-first Android application for tracking kindergarten fees, installments, 
 
 ## Implemented
 
-- Children: add, rename, and safely deactivate while preserving payment history.
+- Children: add individually, bulk-import by pasting one name per line, rename, and safely deactivate while preserving payment history.
 - Fees: yearly amount, full-year or two-installment mode, and due dates.
 - Payments: mandatory camera receipt photo; layout-aware Czech cash-receipt OCR for receipt number, payer/child name, total amount, and date; editable review/correction; optional notes, status, remaining balance, editing, and deletion.
 - Expenses: mandatory camera receipt photo, OCR review/correction, paper receipt count number, date, amount, supplier, description, optional note, editing, and deletion.
@@ -18,6 +18,10 @@ Offline-first Android application for tracking kindergarten fees, installments, 
 The canonical English text is stored in `app/src/main/res/values/strings.xml`. The editable Czech draft is stored in `app/src/main/res/values-cs/strings.xml`. To improve Czech wording, edit only the text between the tags in the Czech file and keep every `name` attribute unchanged. Positional placeholders such as `%1$s` must also be retained because the app replaces them with runtime values.
 
 When a new English string is added, add a matching entry with the same `name` to the Czech file. The two language files currently contain matching resource keys. Users can change the language under Settings → Language; Android persists the selection and recreates the UI immediately.
+
+## Importing children
+
+On the Dashboard, tap **Import children**, paste one child name per line, choose the shared enrollment date, review the live count, and confirm. The importer trims whitespace, ignores empty lines, and skips names that duplicate either an existing active child or an earlier pasted line. Duplicate matching ignores capitalization and Czech diacritics. Existing child records and payment history are not modified.
 
 ## Build requirements
 

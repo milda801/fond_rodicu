@@ -3256,6 +3256,8 @@ id checkbox
 id checked
 id childNameInput
 id childSpinner
+id childrenEnrollmentDateInput
+id childrenNamesInput
 id chronometer
 id circle_center
 id clear_text
@@ -3381,6 +3383,8 @@ id ignore
 id ignoreRequest
 id image
 id immediateStop
+id importChildrenButton
+id importChildrenPreview
 id included
 id indeterminate
 id info
@@ -3825,6 +3829,7 @@ layout design_text_input_end_icon
 layout design_text_input_start_icon
 layout dialog_child
 layout dialog_expense
+layout dialog_import_children
 layout dialog_payment
 layout fragment_dashboard
 layout fragment_expenses
@@ -3999,6 +4004,7 @@ string edit_child
 string edit_expense
 string edit_item_instruction
 string edit_payment
+string enrollment_date
 string error_a11y_label
 string error_icon_content_description
 string existing_receipt_kept
@@ -4016,6 +4022,13 @@ string first_half_amount
 string first_half_due_date
 string hide_bottom_view_on_scroll_behavior
 string icon_content_description
+string import_action
+string import_children
+string import_children_hint
+string import_children_instruction
+string import_children_invalid
+string import_children_preview
+string import_children_result
 string invalid_academic_year
 string invalid_entry
 string invalid_fee_settings

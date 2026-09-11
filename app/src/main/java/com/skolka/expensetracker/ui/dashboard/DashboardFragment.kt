@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.EditText
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -18,6 +20,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.skolka.expensetracker.data.models.Child
 import java.time.LocalDate
 import java.text.NumberFormat
+import com.skolka.expensetracker.services.importing.ChildNameImporter
 
 class DashboardFragment : Fragment() {
     private val viewModel by lazy {
@@ -33,6 +36,9 @@ class DashboardFragment : Fragment() {
         val statuses = view.findViewById<LinearLayout>(R.id.statusContainer)
         view.findViewById<View>(R.id.addChildButton).setOnClickListener {
             showChildDialog(null)
+        }
+        view.findViewById<View>(R.id.importChildrenButton).setOnClickListener {
+            showImportChildrenDialog()
         }
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(androidx.lifecycle.Lifecycle.State.STARTED) {
@@ -101,6 +107,53 @@ class DashboardFragment : Fragment() {
                     } else {
                         app.childRepository.updateChild(existing.copy(name = name, updatedAt = System.currentTimeMillis().toString()))
                     }
+                }
+                dialog.dismiss()
+            }
+        }
+        dialog.show()
+    }
+
+    private fun showImportChildrenDialog() {
+        val form = layoutInflater.inflate(R.layout.dialog_import_children, null)
+        val namesInput = form.findViewById<EditText>(R.id.childrenNamesInput)
+        val dateInput = form.findViewById<EditText>(R.id.childrenEnrollmentDateInput)
+        val preview = form.findViewById<TextView>(R.id.importChildrenPreview)
+        dateInput.setText(LocalDate.now().toString())
+        val existingNames = viewModel.dashboardState.value.children.map { it.name }
+
+        fun updatePreview() {
+            val plan = ChildNameImporter.plan(namesInput.text.toString(), existingNames)
+            preview.text = getString(R.string.import_children_preview, plan.namesToImport.size, plan.duplicateNames.size)
+        }
+
+        namesInput.addTextChangedListener(object : android.text.TextWatcher {
+            override fun beforeTextChanged(text: CharSequence?, start: Int, count: Int, after: Int) = Unit
+            override fun onTextChanged(text: CharSequence?, start: Int, before: Int, count: Int) = updatePreview()
+            override fun afterTextChanged(text: android.text.Editable?) = Unit
+        })
+        updatePreview()
+
+        val dialog = MaterialAlertDialogBuilder(requireContext())
+            .setTitle(R.string.import_children)
+            .setView(form)
+            .setNegativeButton(R.string.cancel, null)
+            .setPositiveButton(R.string.import_action, null)
+            .create()
+        dialog.setOnShowListener {
+            dialog.getButton(android.content.DialogInterface.BUTTON_POSITIVE).setOnClickListener {
+                val date = runCatching { LocalDate.parse(dateInput.text.toString().trim()) }.getOrNull()
+                val plan = ChildNameImporter.plan(namesInput.text.toString(), existingNames)
+                if (date == null || plan.namesToImport.isEmpty()) {
+                    Toast.makeText(requireContext(), R.string.import_children_invalid, Toast.LENGTH_LONG).show()
+                    return@setOnClickListener
+                }
+                viewLifecycleOwner.lifecycleScope.launch {
+                    val app = requireActivity().application as ExpenseTrackerApplication
+                    plan.namesToImport.forEach { name ->
+                        app.childRepository.insertChild(Child(name = name, enrollmentDate = date.toString()))
+                    }
+                    Toast.makeText(requireContext(), getString(R.string.import_children_result, plan.namesToImport.size, plan.duplicateNames.size), Toast.LENGTH_LONG).show()
                 }
                 dialog.dismiss()
             }

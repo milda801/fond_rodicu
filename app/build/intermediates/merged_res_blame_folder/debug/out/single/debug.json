@@ -56,20 +56,12 @@
         "source": "/home/vscode/.gradle/daemon/8.0.2/com.skolka.expensetracker.app-main-59:/drawable/ic_report.xml"
     },
     {
-        "merged": "/home/vscode/.gradle/daemon/8.0.2/com.skolka.expensetracker.app-merged_res-57:/layout_fragment_reports.xml.flat",
-        "source": "/home/vscode/.gradle/daemon/8.0.2/com.skolka.expensetracker.app-main-59:/layout/fragment_reports.xml"
-    },
-    {
         "merged": "/home/vscode/.gradle/daemon/8.0.2/com.skolka.expensetracker.app-merged_res-57:/xml_locales_config.xml.flat",
         "source": "/home/vscode/.gradle/daemon/8.0.2/com.skolka.expensetracker.app-main-59:/xml/locales_config.xml"
     },
     {
-        "merged": "com.skolka.expensetracker.app-merged_res-57:/layout_dialog_expense.xml.flat",
-        "source": "com.skolka.expensetracker.app-main-59:/layout/dialog_expense.xml"
-    },
-    {
-        "merged": "com.skolka.expensetracker.app-merged_res-57:/layout_dialog_payment.xml.flat",
-        "source": "com.skolka.expensetracker.app-main-59:/layout/dialog_payment.xml"
+        "merged": "/home/vscode/.gradle/daemon/8.0.2/com.skolka.expensetracker.app-merged_res-57:/layout_fragment_reports.xml.flat",
+        "source": "/home/vscode/.gradle/daemon/8.0.2/com.skolka.expensetracker.app-main-59:/layout/fragment_reports.xml"
     },
     {
         "merged": "/home/vscode/.gradle/daemon/8.0.2/com.skolka.expensetracker.app-merged_res-57:/menu_bottom_navigation.xml.flat",
@@ -96,7 +88,15 @@
         "source": "/home/vscode/.gradle/daemon/8.0.2/com.skolka.expensetracker.app-main-59:/drawable/ic_expense.xml"
     },
     {
+        "merged": "com.skolka.expensetracker.app-merged_res-57:/layout_dialog_import_children.xml.flat",
+        "source": "com.skolka.expensetracker.app-main-59:/layout/dialog_import_children.xml"
+    },
+    {
         "merged": "/home/vscode/.gradle/daemon/8.0.2/com.skolka.expensetracker.app-merged_res-57:/color_bottom_navigation_item.xml.flat",
         "source": "/home/vscode/.gradle/daemon/8.0.2/com.skolka.expensetracker.app-main-59:/color/bottom_navigation_item.xml"
+    },
+    {
+        "merged": "com.skolka.expensetracker.app-merged_res-57:/layout_fragment_dashboard.xml.flat",
+        "source": "com.skolka.expensetracker.app-main-59:/layout/fragment_dashboard.xml"
     }
 ]

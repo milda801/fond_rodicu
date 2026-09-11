@@ -107,6 +107,7 @@
     <string name="edit_expense">Upravit výdaj</string>
     <string name="edit_item_instruction">Upravte níže uložené údaje. Stávající fotografie dokladu zůstane zachována, pokud ji nevyfotíte znovu.</string>
     <string name="edit_payment">Upravit platbu</string>
+    <string name="enrollment_date">Datum nástupu (RRRR-MM-DD)</string>
     <string name="error_icon_content_description">Chyba</string>
     <string name="existing_receipt_kept">Stávající fotografie dokladu zůstává zachována.</string>
     <string name="expense_date">Datum výdaje</string>
@@ -120,6 +121,13 @@
     <string name="first_half_amount">Částka za první pololetí</string>
     <string name="first_half_due_date">Splatnost první poloviny (RRRR-MM-DD)</string>
     <string name="icon_content_description">Ikona dialogového okna</string>
+    <string name="import_action">Importovat</string>
+    <string name="import_children">Importovat děti</string>
+    <string name="import_children_hint">Jana Nováková\nPetr Svoboda\nEliška Dvořáková</string>
+    <string name="import_children_instruction">Vložte jedno jméno dítěte na každý řádek. Prázdné řádky a duplicitní jména budou přeskočeny. Všem importovaným dětem bude nastaveno níže uvedené datum nástupu.</string>
+    <string name="import_children_invalid">Vložte alespoň jedno nové jméno a zadejte platné datum nástupu.</string>
+    <string name="import_children_preview">Připraveno k importu: %1$d · Přeskočené duplicity: %2$d</string>
+    <string name="import_children_result">Importováno: %1$d · Přeskočené duplicity: %2$d</string>
     <string name="invalid_academic_year">Použijte formát školního roku RRRR-RRRR, například 2026-2027.</string>
     <string name="invalid_entry">Zkontrolujte všechna povinná pole a zadejte kladnou částku a platné datum.</string>
     <string name="invalid_fee_settings">Zadejte platný školní rok, kladné školné a platná data splatnosti.</string>

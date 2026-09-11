@@ -25,16 +25,20 @@ public final class FragmentDashboardBinding implements ViewBinding {
   public final MaterialButton addChildButton;
 
   @NonNull
+  public final MaterialButton importChildrenButton;
+
+  @NonNull
   public final LinearLayout statusContainer;
 
   @NonNull
   public final TextView summaryText;
 
   private FragmentDashboardBinding(@NonNull ScrollView rootView,
-      @NonNull MaterialButton addChildButton, @NonNull LinearLayout statusContainer,
-      @NonNull TextView summaryText) {
+      @NonNull MaterialButton addChildButton, @NonNull MaterialButton importChildrenButton,
+      @NonNull LinearLayout statusContainer, @NonNull TextView summaryText) {
     this.rootView = rootView;
     this.addChildButton = addChildButton;
+    this.importChildrenButton = importChildrenButton;
     this.statusContainer = statusContainer;
     this.summaryText = summaryText;
   }
@@ -72,6 +76,12 @@ public final class FragmentDashboardBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.importChildrenButton;
+      MaterialButton importChildrenButton = ViewBindings.findChildViewById(rootView, id);
+      if (importChildrenButton == null) {
+        break missingId;
+      }
+
       id = R.id.statusContainer;
       LinearLayout statusContainer = ViewBindings.findChildViewById(rootView, id);
       if (statusContainer == null) {
@@ -84,8 +94,8 @@ public final class FragmentDashboardBinding implements ViewBinding {
         break missingId;
       }
 
-      return new FragmentDashboardBinding((ScrollView) rootView, addChildButton, statusContainer,
-          summaryText);
+      return new FragmentDashboardBinding((ScrollView) rootView, addChildButton,
+          importChildrenButton, statusContainer, summaryText);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

@@ -100,6 +100,14 @@
     <string name="second_half_amount">Částka za druhé pololetí</string>
     <string name="receipt_photo">Fotografie dokladu</string>
     <string name="number_of_children">Počet dětí</string>
+    <string name="import_children">Importovat děti</string>
+    <string name="import_action">Importovat</string>
+    <string name="import_children_instruction">Vložte jedno jméno dítěte na každý řádek. Prázdné řádky a duplicitní jména budou přeskočeny. Všem importovaným dětem bude nastaveno níže uvedené datum nástupu.</string>
+    <string name="import_children_hint">Jana Nováková\nPetr Svoboda\nEliška Dvořáková</string>
+    <string name="enrollment_date">Datum nástupu (RRRR-MM-DD)</string>
+    <string name="import_children_preview">Připraveno k importu: %1$d · Přeskočené duplicity: %2$d</string>
+    <string name="import_children_invalid">Vložte alespoň jedno nové jméno a zadejte platné datum nástupu.</string>
+    <string name="import_children_result">Importováno: %1$d · Přeskočené duplicity: %2$d</string>
     <string-array name="language_options">
         <item>@string/language_english</item>
         <item>@string/language_czech</item>

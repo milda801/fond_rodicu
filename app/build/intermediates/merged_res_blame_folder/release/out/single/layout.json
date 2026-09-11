@@ -1,9 +1,5 @@
 [
     {
-        "merged": "com.skolka.expensetracker.app-mergeReleaseResources-56:/layout/dialog_expense.xml",
-        "source": "com.skolka.expensetracker.app-main-58:/layout/dialog_expense.xml"
-    },
-    {
         "merged": "/home/vscode/.gradle/daemon/8.0.2/com.skolka.expensetracker.app-mergeReleaseResources-56:/layout/fragment_reports.xml",
         "source": "/home/vscode/.gradle/daemon/8.0.2/com.skolka.expensetracker.app-main-58:/layout/fragment_reports.xml"
     },
@@ -12,12 +8,16 @@
         "source": "/home/vscode/.gradle/daemon/8.0.2/com.skolka.expensetracker.app-main-58:/layout/dialog_child.xml"
     },
     {
+        "merged": "com.skolka.expensetracker.app-mergeReleaseResources-56:/layout/fragment_dashboard.xml",
+        "source": "com.skolka.expensetracker.app-main-58:/layout/fragment_dashboard.xml"
+    },
+    {
         "merged": "/home/vscode/.gradle/daemon/8.0.2/com.skolka.expensetracker.app-mergeReleaseResources-56:/layout/fragment_expenses.xml",
         "source": "/home/vscode/.gradle/daemon/8.0.2/com.skolka.expensetracker.app-main-58:/layout/fragment_expenses.xml"
     },
     {
-        "merged": "com.skolka.expensetracker.app-mergeReleaseResources-56:/layout/dialog_payment.xml",
-        "source": "com.skolka.expensetracker.app-main-58:/layout/dialog_payment.xml"
+        "merged": "com.skolka.expensetracker.app-mergeReleaseResources-56:/layout/dialog_import_children.xml",
+        "source": "com.skolka.expensetracker.app-main-58:/layout/dialog_import_children.xml"
     },
     {
         "merged": "/home/vscode/.gradle/daemon/8.0.2/com.skolka.expensetracker.app-mergeReleaseResources-56:/layout/fragment_dashboard.xml",
