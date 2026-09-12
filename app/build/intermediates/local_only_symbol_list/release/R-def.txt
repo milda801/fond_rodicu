@@ -106,6 +106,7 @@ string academic_year
 string add_child
 string add_expense
 string add_payment
+string all_children_paid
 string amount
 string app_name
 string automatic_backup_configured
@@ -178,6 +179,7 @@ string ocr_no_text
 string ocr_processing
 string ocr_review_instruction
 string ocr_wait
+string outstanding_children
 string paid_full
 string paid_partial
 string payment_receipt_number

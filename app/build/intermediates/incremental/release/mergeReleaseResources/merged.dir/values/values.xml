@@ -2002,6 +2002,7 @@
     <string name="add_child">Add child</string>
     <string name="add_expense">Add expense</string>
     <string name="add_payment">Add payment</string>
+    <string name="all_children_paid">All children are fully paid.</string>
     <string name="amount">Amount</string>
     <string name="androidx_startup" translatable="false">androidx.startup</string>
     <string name="app_name">Kindergarten Expenses</string>
@@ -2229,6 +2230,7 @@
     <string name="ocr_processing">Reading receipt…</string>
     <string name="ocr_review_instruction">OCR has attempted to fill the fields from the required receipt photo. Check and edit the values, add any notes, then save.</string>
     <string name="ocr_wait">Please wait until receipt recognition finishes.</string>
+    <string name="outstanding_children">Children still to pay</string>
     <string name="paid_full">Paid</string>
     <string name="paid_partial">Partially paid</string>
     <string name="password_toggle_content_description">Show password</string>

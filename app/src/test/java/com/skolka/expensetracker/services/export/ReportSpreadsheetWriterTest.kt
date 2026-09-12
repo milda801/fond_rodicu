@@ -33,7 +33,9 @@ class ReportSpreadsheetWriterTest {
         expectedAmount = "Expected amount",
         collectedAmount = "Collected amount",
         balance = "Balance",
-        notAvailable = "Not available"
+        notAvailable = "Not available",
+        outstandingChildren = "Children still to pay",
+        allChildrenPaid = "All children are fully paid."
     )
 
     @Test
@@ -84,6 +86,7 @@ class ReportSpreadsheetWriterTest {
         assertTrue(sheet.contains("<v>900.0</v>"))
         assertTrue(sheet.contains("Papír s.r.o."))
         assertTrue(sheet.contains("Number of children"))
+        assertTrue(sheet.contains("Children still to pay"))
         assertTrue(sheet.contains("<c r=\"C9\" s=\"3\"><v>900.0</v></c>"))
         assertTrue(sheet.contains("<c r=\"D9\" s=\"3\"><v>900.0</v></c>"))
         assertTrue(sheet.contains("<v>1674.5</v>"))

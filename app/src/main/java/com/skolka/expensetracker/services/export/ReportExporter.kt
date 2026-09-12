@@ -45,7 +45,9 @@ class ReportExporter(private val context: Context) {
             expectedAmount = string(R.string.total_expected),
             collectedAmount = string(R.string.total_collected),
             balance = string(R.string.current_balance),
-            notAvailable = string(R.string.not_available)
+            notAvailable = string(R.string.not_available),
+            outstandingChildren = string(R.string.outstanding_children),
+            allChildrenPaid = string(R.string.all_children_paid)
         )
         file.outputStream().buffered().use { ReportSpreadsheetWriter(labels).write(data, it) }
         return file
@@ -73,6 +75,7 @@ class ReportExporter(private val context: Context) {
             maximumFractionDigits = 2
         }
         val childNames = (data.allChildren.ifEmpty { data.children }).associate { it.id to it.name }
+        val outstanding = OutstandingChildren.from(data)
 
         fun newPage() {
             document.finishPage(page)
@@ -126,6 +129,8 @@ class ReportExporter(private val context: Context) {
         }
 
         section(string(R.string.report_summary), 340f)
+        canvas.drawRect(margin + 360f, y - 26f, margin + contentWidth, y, sectionFill)
+        canvas.drawText(string(R.string.outstanding_children), margin + 366f, y - 8f, sectionPaint)
         listOf(
             string(R.string.number_of_children) to data.children.size.toString(),
             string(R.string.total_expected) to money.format(data.totalExpected),
@@ -136,7 +141,29 @@ class ReportExporter(private val context: Context) {
             drawCell(value, margin + 210f, y, 130f, 22f, bodyPaint)
             y += 22f
         }
-        y += 14f
+        val outstandingLines = if (outstanding.isEmpty()) {
+            listOf(string(R.string.all_children_paid))
+        } else {
+            outstanding.map { "${it.name} (${money.format(it.missingAmount)})" }
+        }
+        val summaryBottom = y
+        var outstandingX = margin + 360f
+        var outstandingWidth = contentWidth - 360f
+        var outstandingY = y - 88f
+        var outstandingContinued = false
+        outstandingLines.forEach { line ->
+            if (outstandingY + 20f > pageHeight - margin) {
+                newPage()
+                section(string(R.string.outstanding_children))
+                outstandingX = margin
+                outstandingWidth = contentWidth
+                outstandingY = y
+                outstandingContinued = true
+            }
+            drawCell(line, outstandingX, outstandingY, outstandingWidth, 20f, bodyPaint)
+            outstandingY += 20f
+        }
+        y = if (outstandingContinued) outstandingY + 14f else maxOf(summaryBottom, outstandingY) + 14f
 
         val paymentWidths = floatArrayOf(90f, 150f, 115f, 115f, contentWidth - 470f)
         fun paymentHeader() {

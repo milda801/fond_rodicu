@@ -41,6 +41,7 @@
     <string name="add_child">Přidat dítě</string>
     <string name="add_expense">Přidat výdaj</string>
     <string name="add_payment">Přidat platbu</string>
+    <string name="all_children_paid">Všechny děti mají plně zaplaceno.</string>
     <string name="amount">Částka</string>
     <string name="app_name">Výdaje mateřské školy</string>
     <string name="automatic_backup_configured">Cíl automatického zálohování: %1$s</string>
@@ -201,6 +202,7 @@
     <string name="ocr_processing">Načítání dokladu…</string>
     <string name="ocr_review_instruction">OCR se pokusilo vyplnit údaje z povinné fotografie dokladu. Zkontrolujte a upravte hodnoty, doplňte poznámku a poté položku uložte.</string>
     <string name="ocr_wait">Počkejte prosím na dokončení rozpoznávání dokladu.</string>
+    <string name="outstanding_children">Děti, které ještě mají zaplatit</string>
     <string name="paid_full">Zaplaceno</string>
     <string name="paid_partial">Částečně zaplaceno</string>
     <string name="password_toggle_content_description">Zobrazit heslo</string>

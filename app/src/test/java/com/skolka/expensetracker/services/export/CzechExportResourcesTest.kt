@@ -17,7 +17,7 @@ class CzechExportResourcesTest {
             "child_name", "first_half_amount", "second_half_amount", "receipt_photo",
             "expenses", "receipt_number", "supplier_name", "amount", "description",
             "note", "number_of_children", "total_expected", "total_collected",
-            "current_balance", "not_available"
+            "current_balance", "not_available", "outstanding_children", "all_children_paid"
         )
 
         assertTrue(exportKeys.all(czech::containsKey))

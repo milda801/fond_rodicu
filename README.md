@@ -81,7 +81,7 @@ The Reports screen exports a real `.xlsx` workbook with the financial summary at
 
 The PDF export follows the same order and data structure in a landscape table layout. It places the summary first, repeats table headings when payment or expense rows continue onto a new page, and embeds both payment and expense receipt photos while preserving their aspect ratios.
 
-Both XLSX and PDF financial exports are always generated in Czech, including section names, column headings, fallback text, and PDF number formatting. This is independent of whether the application interface is currently set to Czech or English.
+Both XLSX and PDF financial exports are always generated in Czech, including section names, column headings, fallback text, and PDF number formatting. This is independent of whether the application interface is currently set to Czech or English. Beside the summary, each export lists every active child who has not fully paid the current configured fee and the remaining amount in the form `Jméno Příjmení (zbývající částka)`. Payments attached to older fee configurations do not reduce the current amount due.
 
 ## Project documentation
 

@@ -108,6 +108,8 @@
     <string name="import_children_preview">Připraveno k importu: %1$d · Přeskočené duplicity: %2$d</string>
     <string name="import_children_invalid">Vložte alespoň jedno nové jméno a zadejte platné datum nástupu.</string>
     <string name="import_children_result">Importováno: %1$d · Přeskočené duplicity: %2$d</string>
+    <string name="outstanding_children">Děti, které ještě mají zaplatit</string>
+    <string name="all_children_paid">Všechny děti mají plně zaplaceno.</string>
     <string-array name="language_options">
         <item>@string/language_english</item>
         <item>@string/language_czech</item>

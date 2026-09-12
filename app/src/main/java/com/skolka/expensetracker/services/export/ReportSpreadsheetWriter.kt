@@ -27,7 +27,9 @@ data class SpreadsheetLabels(
     val expectedAmount: String,
     val collectedAmount: String,
     val balance: String,
-    val notAvailable: String
+    val notAvailable: String,
+    val outstandingChildren: String,
+    val allChildrenPaid: String
 )
 
 data class HalfYearAmounts(val firstHalf: Double?, val secondHalf: Double?)
@@ -67,8 +69,10 @@ class ReportSpreadsheetWriter(private val labels: SpreadsheetLabels) {
     }
 
     private fun collectImages(data: ReportData): List<EmbeddedImage> {
-        val firstPaymentDataRow = 9
-        val firstExpenseDataRow = 12 + data.payments.size
+        val outstandingRowCount = OutstandingChildren.from(data).size.coerceAtLeast(1)
+        val paymentTitleRow = maxOf(7, outstandingRowCount + 3)
+        val firstPaymentDataRow = paymentTitleRow + 2
+        val firstExpenseDataRow = firstPaymentDataRow + data.payments.size + 3
         val images = buildList {
             data.payments.forEachIndexed { index, payment ->
                 createEmbeddedImage(
@@ -123,17 +127,38 @@ class ReportSpreadsheetWriter(private val labels: SpreadsheetLabels) {
     private fun worksheet(data: ReportData, hasImages: Boolean): String {
         val rows = StringBuilder()
         val childNames = (data.allChildren.ifEmpty { data.children }).associate { it.id to it.name }
+        val outstanding = OutstandingChildren.from(data)
         var row = 1
 
-        rows.append(sheetRow(row, listOf(textCell("A", row, labels.summary, 1)), height = 26.0))
+        rows.append(sheetRow(row, listOf(textCell("A", row, labels.summary, 1), textCell("D", row, labels.outstandingChildren, 1)), height = 26.0))
         val summaryTitleRow = row
-        row++
-        rows.append(summaryRow(row++, labels.numberOfChildren, data.children.size.toDouble(), integer = true))
-        rows.append(summaryRow(row++, labels.expectedAmount, data.totalExpected))
-        rows.append(summaryRow(row++, labels.collectedAmount, data.totalCollected))
-        rows.append(summaryRow(row++, labels.balance, data.balance))
+        val summaryValues = listOf(
+            labels.numberOfChildren to data.children.size.toDouble(),
+            labels.expectedAmount to data.totalExpected,
+            labels.collectedAmount to data.totalCollected,
+            labels.balance to data.balance
+        )
+        val topDataRows = maxOf(summaryValues.size, outstanding.size.coerceAtLeast(1))
+        for (index in 0 until topDataRows) {
+            val topRow = index + 2
+            val cells = buildList {
+                summaryValues.getOrNull(index)?.let { (label, value) ->
+                    add(textCell("A", topRow, label, 4))
+                    add(numberCell("B", topRow, value, if (index == 0) 0 else 3))
+                }
+                if (outstanding.isEmpty() && index == 0) {
+                    add(textCell("D", topRow, labels.allChildrenPaid))
+                } else {
+                    outstanding.getOrNull(index)?.let { child ->
+                        add(textCell("D", topRow, child.name))
+                        add(numberCell("E", topRow, child.missingAmount, 3))
+                    }
+                }
+            }
+            rows.append(sheetRow(topRow, cells))
+        }
 
-        row++
+        row = topDataRows + 3
         rows.append(sheetRow(row, listOf(textCell("A", row, labels.payments, 1)), height = 26.0))
         val paymentTitleRow = row
         row++
@@ -196,7 +221,7 @@ class ReportSpreadsheetWriter(private val labels: SpreadsheetLabels) {
     <col min="6" max="6" width="29" customWidth="1"/>
   </cols>
   <sheetData>$rows</sheetData>
-  <mergeCells count="3"><mergeCell ref="A$summaryTitleRow:B$summaryTitleRow"/><mergeCell ref="A$paymentTitleRow:E$paymentTitleRow"/><mergeCell ref="A$expenseTitleRow:F$expenseTitleRow"/></mergeCells>
+  <mergeCells count="4"><mergeCell ref="A$summaryTitleRow:B$summaryTitleRow"/><mergeCell ref="D$summaryTitleRow:E$summaryTitleRow"/><mergeCell ref="A$paymentTitleRow:E$paymentTitleRow"/><mergeCell ref="A$expenseTitleRow:F$expenseTitleRow"/></mergeCells>
   $drawing
 </worksheet>"""
     }

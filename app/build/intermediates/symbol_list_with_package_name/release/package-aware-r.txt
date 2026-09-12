@@ -3933,6 +3933,7 @@ string academic_year
 string add_child
 string add_expense
 string add_payment
+string all_children_paid
 string amount
 string androidx_startup
 string app_name
@@ -4152,6 +4153,7 @@ string ocr_no_text
 string ocr_processing
 string ocr_review_instruction
 string ocr_wait
+string outstanding_children
 string paid_full
 string paid_partial
 string password_toggle_content_description

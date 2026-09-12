@@ -65,6 +65,7 @@ Android mobile application for kindergarten expense tracking with cloud backup a
   - Payment report in XLSX with receipt number, child, separate half-year amounts, and embedded receipt photo
   - Expense report in XLSX with count number, supplier, amount, description, note, and embedded receipt photo
   - XLSX summary at the top of the worksheet with active-child count, expected amount, collected amount, and current balance
+  - Outstanding-payment list beside the summary with each active child and the amount remaining for the current fee configuration
   - Matching landscape PDF report with the summary first, payment and expense tables, repeated page headings, and embedded receipt photos
   - Balance sheet report (Excel/PDF)
 - **Email Export**:
@@ -216,6 +217,10 @@ CREATE TABLE sync_metadata (
 - Data management
   - Import/export database
   - Clear all data (with confirmation)
+- Class and accounting details
+  - Editable class nickname used to identify the class in the app and exported reports
+  - Editable opening balance carried forward from the previous academic year; accepts positive, zero, or negative values
+  - Persist both values locally and include them in complete JSON backup/restore
 
 ---
 
@@ -285,6 +290,10 @@ CREATE TABLE sync_metadata (
 - Generate future charts/visualizations if requested
 - [x] Generate a matching landscape PDF with summary, payment/expense tables, half-year allocation, receipt photos, and automatic page continuation.
 - [x] Generate both XLSX and PDF financial reports exclusively in Czech, independent of the selected application-interface language.
+- [x] Show unpaid and partially paid active children beside the summary in both formats, using only payments assigned to the active fee configuration.
+- [ ] Add the export timestamp to generated XLSX and PDF filenames so successive reports do not overwrite or obscure one another.
+- [ ] Show the export date and time inside both XLSX and PDF reports.
+- [ ] Include the configured class nickname in both the exported filenames and report contents.
 - Generate PDF reports with formatted layout
 
 ### 7.2 Email Delivery
@@ -339,6 +348,9 @@ CREATE TABLE sync_metadata (
 - [ ] Testing and bug fixes
 - [ ] Release build and signing
 - [ ] **Low priority:** Further improve handwritten payment-receipt OCR accuracy after higher-priority workflows and physical-device release testing are complete
+- [ ] Add timestamped export filenames and an export date/time inside XLSX and PDF documents.
+- [ ] Add a persisted class nickname setting and include it in exported filenames and report contents.
+- [ ] Add a persisted previous-year opening balance and calculate current balance as `opening balance + collected payments - expenses`.
 
 ### Development Environment
 - [x] Add a VS Code Dev Container based on Ubuntu 22.04.
@@ -484,3 +496,4 @@ dependencies {
 3. Choose Gmail OAuth or an authenticated backend only if unattended scheduled email is required.
 4. Prepare, sign, and test the release build.
 5. Treat additional handwritten payment-receipt OCR tuning as low priority; keep OCR best-effort and require users to review/edit every result.
+6. Implement the planned report metadata and accounting settings: timestamped filenames, in-document export date/time, class nickname, and previous-year opening balance.

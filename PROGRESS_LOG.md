@@ -702,6 +702,39 @@ d:/_actual/099/skolka/
 - [x] Ran `./gradlew test assembleDebug --no-daemon --warning-mode all` successfully; all 76 tasks completed, including bulk-name parser tests, debug/release unit tests, and debug APK generation.
 - [ ] Verify copy/paste behavior with names copied from common email and spreadsheet applications on a physical device.
 
+## Outstanding child-payment list in exports - 2026-09-11
+
+### Completed
+- [x] Added a list beside the summary in both XLSX and PDF showing active children who still owe part or all of the configured yearly fee.
+- [x] Show each entry as the child name and missing amount, including fully unpaid children immediately after bulk import.
+- [x] Exclude fully paid children and ignore payments attached to historical fee configurations when calculating the current missing amount.
+- [x] Added a Czech heading and an all-children-paid fallback message.
+- [x] Added focused tests for unpaid, partially paid, fully paid, historical-payment, and missing-fee scenarios.
+
+### Verification pending
+- [x] Ran the focused outstanding-child, spreadsheet-writer, and Czech-export resource unit tests successfully after recovering from the interrupted editor session.
+- [x] Ran `./gradlew test assembleDebug --no-daemon --warning-mode all` successfully after recovery; all 76 tasks completed, debug/release unit tests passed, and the debug APK was generated.
+- [ ] Verify the outstanding list with a long real-world class list in both exported formats.
+
+### Recovery refinement
+- [x] Removed the PDF list's five-line truncation so long classes continue onto additional pages instead of silently omitting children.
+- [x] Made outstanding-child ordering locale-independent for deterministic exports and tests.
+
+## Future report metadata and opening balance - 2026-09-12
+
+### Requested backlog
+- [ ] Add a timestamp to every generated PDF and XLSX filename.
+- [ ] Display the export date inside both report formats.
+- [ ] Add a class nickname field in Settings and include it in exported filenames and report contents.
+- [ ] Add a Settings field for the balance carried forward from the previous academic year, allowing positive, zero, and negative values.
+- [ ] Persist and back up the class nickname and opening balance so they survive app restarts and restores.
+- [ ] Update dashboard and report calculations to use `opening balance + total collected - total expenses` as the current account balance.
+- [ ] Add Room migration, localization resources, validation, and unit tests when these enhancements are implemented.
+
+### Status
+- [x] Recorded the requested enhancements and intended balance formula in the implementation roadmap.
+- [ ] Implementation is intentionally deferred for a future task.
+
 ### Verification
 - [x] Ran `./gradlew test assembleDebug --no-daemon --warning-mode all` successfully; all 76 tasks completed, including debug and release unit tests, and the debug APK was generated.
 - [x] Re-ran the same full verification after moving the summary and adding expense receipt photos; all 76 tasks completed successfully.
