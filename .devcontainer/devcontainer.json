@@ -1,0 +1,39 @@
+{
+  "name": "Kindergarten Expense Tracker Android",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": "..",
+    "args": {
+      "ANDROID_PLATFORM": "34",
+      "ANDROID_BUILD_TOOLS": "34.0.0",
+      "GRADLE_VERSION": "8.0.2"
+    }
+  },
+  "remoteUser": "vscode",
+  "containerEnv": {
+    "ANDROID_HOME": "/opt/android-sdk",
+    "ANDROID_SDK_ROOT": "/opt/android-sdk",
+    "JAVA_HOME": "/usr/lib/jvm/java-17-openjdk-amd64"
+  },
+  "mounts": [
+    "source=skolka-gradle-cache,target=/home/vscode/.gradle,type=volume"
+  ],
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "fwcd.kotlin",
+        "vscjava.vscode-gradle",
+        "redhat.java",
+        "adelphes.android-dev-ext",
+        "ZooCodeOrganization.zoo-code"
+      ],
+      "settings": {
+        "java.import.gradle.java.home": "/usr/lib/jvm/java-17-openjdk-amd64",
+        "java.configuration.updateBuildConfiguration": "automatic",
+        "terminal.integrated.defaultProfile.linux": "bash"
+      }
+    }
+  },
+  "postCreateCommand": "sudo chown -R vscode:vscode /home/vscode/.gradle && if [ ! -f ./gradlew ]; then gradle wrapper --gradle-version 8.0.2 --distribution-type bin; fi && ./gradlew --version",
+  "shutdownAction": "stopContainer"
+}
